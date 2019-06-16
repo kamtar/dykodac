@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name DykoDAC-rescue)(type Legacy)(uri ${KIPRJMOD}/DykoDAC-rescue.lib)(options "")(descr ""))
+)
