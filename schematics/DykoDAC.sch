@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Sheet
-S 750  750  1200 1150
+S 750  750  1200 1300
 U 5C91BC19
 F0 "PowerSupply" 50
 F1 "DykoDAC_Power.sch" 50
@@ -33,7 +33,7 @@ F0 "DykoDAC_Output" 50
 F1 "DykoDAC_Output.sch" 50
 $EndSheet
 $Sheet
-S 2200 800  1300 1350
+S 2200 800  1300 1200
 U 5CF60BAD
 F0 "DykoDAC_MCU" 47
 F1 "DykoDAC_MCU.sch" 47
