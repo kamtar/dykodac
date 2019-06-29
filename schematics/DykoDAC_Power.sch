@@ -53,7 +53,7 @@ U 1 1 5C8C0DAF
 P 2750 2000
 F 0 "C2" H 2868 2046 50  0000 L CNN
 F 1 "4700u" H 2868 1955 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:CP_Radial_D5.0mm_P2.50mm" H 2788 1850 50  0001 C CNN
+F 2 "kamtar:CP_Radial_D16.0mm_P7.50mm_Hor" H 2788 1850 50  0001 C CNN
 F 3 "~" H 2750 2000 50  0001 C CNN
 	1    2750 2000
 	1    0    0    -1  
@@ -64,7 +64,7 @@ U 1 1 5C8C0E03
 P 2750 2500
 F 0 "C3" H 2868 2546 50  0000 L CNN
 F 1 "4700u" H 2868 2455 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:CP_Radial_D5.0mm_P2.50mm" H 2788 2350 50  0001 C CNN
+F 2 "kamtar:CP_Radial_D16.0mm_P7.50mm_Hor" H 2788 2350 50  0001 C CNN
 F 3 "~" H 2750 2500 50  0001 C CNN
 	1    2750 2500
 	1    0    0    -1  
