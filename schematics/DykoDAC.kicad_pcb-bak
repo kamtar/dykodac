@@ -3,7 +3,7 @@
   (general
     (thickness 1.6)
     (drawings 10)
-    (tracks 88)
+    (tracks 85)
     (zones 0)
     (modules 128)
     (nets 94)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.25)
+    (last_trace_width 0.6)
     (user_trace_width 0.6)
     (user_trace_width 1.48)
     (trace_clearance 0.2)
@@ -61,7 +61,7 @@
     (pad_drill 0.762)
     (pad_to_mask_clearance 0)
     (aux_axis_origin 0 0)
-    (visible_elements 7FFFF7FF)
+    (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 0x010fc_ffffffff)
       (usegerberextensions false)
@@ -5604,10 +5604,6 @@
   (segment (start 60.214999 122.104999) (end 61.537 123.427) (width 0.25) (layer F.Cu) (net 33))
   (segment (start 56.743001 122.104999) (end 60.214999 122.104999) (width 0.25) (layer F.Cu) (net 33))
   (segment (start 55.658 123.19) (end 56.743001 122.104999) (width 0.25) (layer F.Cu) (net 33))
-  (segment (start 57.658 125.73) (end 58.732802 125.73) (width 0.6) (layer F.Cu) (net 34))
-  (segment (start 58.732802 125.73) (end 60.198 125.73) (width 0.6) (layer F.Cu) (net 34))
-  (segment (start 60.198 125.73) (end 60.198 125.73) (width 0.6) (layer F.Cu) (net 34) (tstamp 5D18B0C7))
-  (via (at 60.198 125.73) (size 0.8) (drill 0.4) (layers F.Cu B.Cu) (net 34))
   (segment (start 60.763685 125.73) (end 61.906685 124.587) (width 0.6) (layer B.Cu) (net 34))
   (segment (start 60.198 125.73) (end 60.763685 125.73) (width 0.6) (layer B.Cu) (net 34))
   (segment (start 61.906685 124.587) (end 62.992 124.587) (width 0.6) (layer B.Cu) (net 34))
@@ -5616,6 +5612,7 @@
   (segment (start 62.992 124.587) (end 62.992 123.427) (width 0.6) (layer F.Cu) (net 34))
   (segment (start 62.992 121.105) (end 63.066 121.031) (width 0.6) (layer F.Cu) (net 34))
   (segment (start 62.992 123.427) (end 62.992 121.105) (width 0.6) (layer F.Cu) (net 34))
+  (segment (start 60.198 125.73) (end 57.658 125.73) (width 0.6) (layer B.Cu) (net 34))
   (segment (start 58.105 123.637) (end 57.658 123.19) (width 0.25) (layer F.Cu) (net 35))
   (segment (start 62.042 125.652) (end 62.042 125.747) (width 0.25) (layer F.Cu) (net 35))
   (segment (start 60.977 124.587) (end 62.042 125.652) (width 0.25) (layer F.Cu) (net 35))
@@ -5754,15 +5751,15 @@
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
     (polygon
       (pts
-        (xy 94.742 71.755) (xy 94.742 77.851) (xy 103.632 77.851) (xy 103.632 84.963) (xy 98.552 84.963)
+        (xy 94.742 71.755) (xy 94.742 77.851) (xy 103.632 77.851) (xy 103.632 84.709) (xy 98.552 84.709)
         (xy 98.552 92.837) (xy 107.95 92.837) (xy 107.95 71.755)
       )
     )
     (filled_polygon
       (pts
-        (xy 107.823 92.71) (xy 98.679 92.71) (xy 98.679 85.09) (xy 103.632 85.09) (xy 103.656776 85.08756)
-        (xy 103.680601 85.080333) (xy 103.702557 85.068597) (xy 103.721803 85.052803) (xy 103.737597 85.033557) (xy 103.749333 85.011601)
-        (xy 103.75656 84.987776) (xy 103.759 84.963) (xy 103.759 77.851) (xy 103.75656 77.826224) (xy 103.749333 77.802399)
+        (xy 107.823 92.71) (xy 98.679 92.71) (xy 98.679 84.836) (xy 103.632 84.836) (xy 103.656776 84.83356)
+        (xy 103.680601 84.826333) (xy 103.702557 84.814597) (xy 103.721803 84.798803) (xy 103.737597 84.779557) (xy 103.749333 84.757601)
+        (xy 103.75656 84.733776) (xy 103.759 84.709) (xy 103.759 77.851) (xy 103.75656 77.826224) (xy 103.749333 77.802399)
         (xy 103.737597 77.780443) (xy 103.721803 77.761197) (xy 103.702557 77.745403) (xy 103.680601 77.733667) (xy 103.656776 77.72644)
         (xy 103.632 77.724) (xy 99.897185 77.724) (xy 99.851939 77.715) (xy 99.648061 77.715) (xy 99.602815 77.724)
         (xy 94.869 77.724) (xy 94.869 71.882) (xy 107.823 71.882)
@@ -5939,8 +5936,8 @@
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
     (polygon
       (pts
-        (xy 104.648 57.15) (xy 112.268 57.15) (xy 112.268 58.166) (xy 112.268 58.166) (xy 112.268 58.42)
-        (xy 112.268 63.5) (xy 104.648 63.5)
+        (xy 104.648 57.15) (xy 112.268 57.15) (xy 112.268 58.166) (xy 112.268 58.42) (xy 112.268 63.5)
+        (xy 104.648 63.5)
       )
     )
     (filled_polygon
