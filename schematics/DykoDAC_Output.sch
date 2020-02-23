@@ -1057,7 +1057,7 @@ L kamtar:AudioJack2_Ground_Switch J2
 U 1 1 5E5732C1
 P 10600 3800
 F 0 "J2" H 10420 3818 50  0000 R CNN
-F 1 "AudioJack2_Ground_Switch" H 10420 3727 50  0000 R CNN
+F 1 "AudioJack" H 10420 3727 50  0000 R CNN
 F 2 "Connect:Stereo_Jack_3.5mm_Switch_Ledino_KB3SPRS" H 10600 4000 50  0001 C CNN
 F 3 "~" H 10600 4000 50  0001 C CNN
 	1    10600 3800
