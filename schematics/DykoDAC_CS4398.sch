@@ -54,7 +54,7 @@ U 1 1 5C8F88F7
 P 7400 1700
 F 0 "C26" H 7282 1654 50  0000 R CNN
 F 1 "10u" H 7282 1745 50  0000 R CNN
-F 2 "Capacitors_SMD:CP_Elec_4x5.7" H 7438 1550 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 7438 1550 50  0001 C CNN
 F 3 "~" H 7400 1700 50  0001 C CNN
 	1    7400 1700
 	-1   0    0    1   
@@ -65,7 +65,7 @@ U 1 1 5C8F8965
 P 8650 1700
 F 0 "C29" H 8532 1654 50  0000 R CNN
 F 1 "10u" H 8532 1745 50  0000 R CNN
-F 2 "Capacitors_SMD:CP_Elec_4x5.7" H 8688 1550 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 8688 1550 50  0001 C CNN
 F 3 "~" H 8650 1700 50  0001 C CNN
 	1    8650 1700
 	-1   0    0    1   
@@ -189,8 +189,9 @@ U 1 1 5C8F9AF4
 P 9750 3800
 F 0 "C32" H 9800 3900 50  0000 L CNN
 F 1 "100u" H 9800 3700 50  0000 L CNN
-F 2 "Capacitors_SMD:CP_Elec_6.3x5.8" H 9788 3650 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-D_EIA-7343-31_Reflow" H 9788 3650 50  0001 C CNN
 F 3 "~" H 9750 3800 50  0001 C CNN
+F 4 "TAJD107K016SNJ" H 9750 3800 50  0001 C CNN "Part"
 	1    9750 3800
 	1    0    0    -1  
 $EndComp
@@ -211,7 +212,7 @@ U 1 1 5C8F9DE0
 P 9750 4250
 F 0 "C33" H 9632 4204 50  0000 R CNN
 F 1 "33u" H 9632 4295 50  0000 R CNN
-F 2 "Capacitors_SMD:CP_Elec_4x5.7" H 9788 4100 50  0001 C CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 9788 4100 50  0001 C CNN
 F 3 "~" H 9750 4250 50  0001 C CNN
 	1    9750 4250
 	-1   0    0    1   
@@ -256,17 +257,6 @@ Wire Wire Line
 Connection ~ 9450 3600
 Wire Wire Line
 	9450 3600 9750 3600
-$Comp
-L Device:CP C34
-U 1 1 5C8FCF01
-P 10150 3800
-F 0 "C34" H 10268 3846 50  0000 L CNN
-F 1 "3.3u" H 10268 3755 50  0000 L CNN
-F 2 "Capacitors_SMD:CP_Elec_4x5.7" H 10188 3650 50  0001 C CNN
-F 3 "~" H 10150 3800 50  0001 C CNN
-	1    10150 3800
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	8950 3650 9100 3650
 Wire Wire Line
@@ -528,8 +518,9 @@ AR Path="/5CF60BAD/5D1FED66" Ref="X?"  Part="1"
 AR Path="/5C8F8588/5D1FED66" Ref="X1"  Part="1" 
 F 0 "X1" H 2800 5100 50  0000 L CNN
 F 1 "22.5792Mhz" H 2800 5000 50  0000 L CNN
-F 2 "Oscillators:Oscillator_SMD_TXC_7C-4pin_5.0x3.2mm_HandSoldering" H 3350 4350 50  0001 C CNN
+F 2 "Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm" H 3350 4350 50  0001 C CNN
 F 3 "http://www.txccorp.com/download/products/osc/7C_o.pdf" H 2550 4700 50  0001 C CNN
+F 4 "DSC1001CI5" H 3100 4850 50  0000 C CNN "Part"
 	1    2650 4700
 	1    0    0    -1  
 $EndComp
@@ -569,7 +560,7 @@ AR Path="/5CF60BAD/5D1FED7B" Ref="X?"  Part="1"
 AR Path="/5C8F8588/5D1FED7B" Ref="X2"  Part="1" 
 F 0 "X2" H 2750 6650 50  0000 L CNN
 F 1 "24.576Mhz" H 2750 6550 50  0000 L CNN
-F 2 "Oscillators:Oscillator_SMD_TXC_7C-4pin_5.0x3.2mm_HandSoldering" H 3350 5900 50  0001 C CNN
+F 2 "Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm" H 3350 5900 50  0001 C CNN
 F 3 "http://www.txccorp.com/download/products/osc/7C_o.pdf" H 2550 6250 50  0001 C CNN
 	1    2650 6250
 	1    0    0    -1  
@@ -647,7 +638,7 @@ P 2350 5900
 AR Path="/5CF60BAD/5D1FEDA4" Ref="C?"  Part="1" 
 AR Path="/5C8F8588/5D1FEDA4" Ref="C23"  Part="1" 
 F 0 "C23" V 2098 5900 50  0000 C CNN
-F 1 "100n" V 2189 5900 50  0000 C CNN
+F 1 "0.1u" V 2189 5900 50  0000 C CNN
 F 2 "Capacitors_SMD:C_0603" H 2388 5750 50  0001 C CNN
 F 3 "~" H 2350 5900 50  0001 C CNN
 	1    2350 5900
@@ -680,7 +671,7 @@ P 2350 4350
 AR Path="/5CF60BAD/5D1FEDB4" Ref="C?"  Part="1" 
 AR Path="/5C8F8588/5D1FEDB4" Ref="C22"  Part="1" 
 F 0 "C22" V 2098 4350 50  0000 C CNN
-F 1 "100n" V 2189 4350 50  0000 C CNN
+F 1 "0.1u" V 2189 4350 50  0000 C CNN
 F 2 "Capacitors_SMD:C_0603" H 2388 4200 50  0001 C CNN
 F 3 "~" H 2350 4350 50  0001 C CNN
 	1    2350 4350
@@ -768,4 +759,15 @@ Wire Wire Line
 	6500 2450 7150 2450
 NoConn ~ 8950 2450
 NoConn ~ 8950 3450
+$Comp
+L Device:CP C34
+U 1 1 5E63FCBA
+P 10150 3800
+F 0 "C34" H 10268 3846 50  0000 L CNN
+F 1 "3.3u" H 10268 3755 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-B_EIA-3528-21_Reflow" H 10188 3650 50  0001 C CNN
+F 3 "~" H 10150 3800 50  0001 C CNN
+	1    10150 3800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
