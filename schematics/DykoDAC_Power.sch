@@ -924,4 +924,24 @@ $EndComp
 Connection ~ 4950 2850
 Wire Wire Line
 	4950 2850 4950 3000
+$Comp
+L Device:CP C49
+U 1 1 5EAF933C
+P 9850 2350
+F 0 "C49" H 9968 2396 50  0000 L CNN
+F 1 "100u" H 9968 2305 50  0000 L CNN
+F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-D_EIA-7343-31_Reflow" H 9888 2200 50  0001 C CNN
+F 3 "~" H 9850 2350 50  0001 C CNN
+	1    9850 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 2100 9850 2100
+Wire Wire Line
+	9850 2100 9850 2200
+Wire Wire Line
+	9850 2500 9850 2700
+Wire Wire Line
+	9850 2700 9400 2700
+Connection ~ 9400 2700
 $EndSCHEMATC

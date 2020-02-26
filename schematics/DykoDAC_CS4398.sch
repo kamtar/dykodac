@@ -14,19 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L DykoDAC-rescue:CS4398-cirrus-2 U?
-U 1 1 5C8F866A
-P 8050 3350
-AR Path="/5C8F866A" Ref="U?"  Part="1" 
-AR Path="/5C8F8588/5C8F866A" Ref="U8"  Part="1" 
-F 0 "U8" H 8050 3400 50  0000 C CNN
-F 1 "CS4398" H 8050 3300 50  0000 C CNN
-F 2 "Housings_SSOP:TSSOP-28_4.4x9.7mm_Pitch0.65mm" H 8050 3500 50  0001 C CNN
-F 3 "" H 8050 3350 50  0001 C CNN
-	1    8050 3350
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C C27
 U 1 1 5C8F872D
 P 7750 1700
@@ -243,8 +230,6 @@ Wire Wire Line
 	9450 4400 9450 4500
 Connection ~ 9450 4500
 Wire Wire Line
-	9450 4500 9150 4500
-Wire Wire Line
 	9750 3650 9750 3600
 Wire Wire Line
 	9150 3600 9150 3850
@@ -411,37 +396,6 @@ Wire Wire Line
 	6800 2750 7150 2750
 Text GLabel 6750 4250 0    50   Input ~ 0
 DAC_RST
-Wire Wire Line
-	7150 4250 6900 4250
-$Comp
-L Device:R R6
-U 1 1 5C8EA06B
-P 6900 4600
-F 0 "R6" H 6830 4554 50  0000 R CNN
-F 1 "10k" H 6830 4645 50  0000 R CNN
-F 2 "Resistors_SMD:R_0603" V 6830 4600 50  0001 C CNN
-F 3 "~" H 6900 4600 50  0001 C CNN
-	1    6900 4600
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:+3V3 #PWR019
-U 1 1 5C8EA11A
-P 6900 4950
-F 0 "#PWR019" H 6900 4800 50  0001 C CNN
-F 1 "+3V3" H 6915 5123 50  0000 C CNN
-F 2 "" H 6900 4950 50  0001 C CNN
-F 3 "" H 6900 4950 50  0001 C CNN
-	1    6900 4950
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	6900 4950 6900 4750
-Wire Wire Line
-	6900 4450 6900 4250
-Connection ~ 6900 4250
-Wire Wire Line
-	6900 4250 6750 4250
 Text GLabel 6450 3750 0    50   Input ~ 0
 DAC_CS
 Wire Wire Line
@@ -451,35 +405,6 @@ Wire Wire Line
 Wire Wire Line
 	5800 3650 5800 3550
 Connection ~ 5800 3550
-Wire Wire Line
-	5800 3550 6450 3550
-Wire Wire Line
-	6450 3750 6900 3750
-$Comp
-L Device:R R5
-U 1 1 5C8F4EB9
-P 6700 3650
-F 0 "R5" V 6650 3800 50  0000 C CNN
-F 1 "10k" V 6700 3650 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 6630 3650 50  0001 C CNN
-F 3 "~" H 6700 3650 50  0001 C CNN
-	1    6700 3650
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6850 3650 6900 3650
-Wire Wire Line
-	6900 3650 6900 3750
-Connection ~ 6900 3750
-Wire Wire Line
-	6900 3750 7150 3750
-Wire Wire Line
-	6550 3650 6450 3650
-Wire Wire Line
-	6450 3650 6450 3550
-Connection ~ 6450 3550
-Wire Wire Line
-	6450 3550 7150 3550
 Text GLabel 6550 4050 0    50   Input ~ 0
 MCU_MOSI
 Text GLabel 6550 3850 0    50   Input ~ 0
@@ -760,14 +685,35 @@ Wire Wire Line
 NoConn ~ 8950 2450
 NoConn ~ 8950 3450
 $Comp
-L Device:CP C34
-U 1 1 5E63FCBA
+L Device:C C34
+U 1 1 5E999F0B
 P 10150 3800
-F 0 "C34" H 10268 3846 50  0000 L CNN
-F 1 "3.3u" H 10268 3755 50  0000 L CNN
-F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-B_EIA-3528-21_Reflow" H 10188 3650 50  0001 C CNN
+F 0 "C34" H 10265 3846 50  0000 L CNN
+F 1 "3.3u" H 10265 3755 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" H 10188 3650 50  0001 C CNN
 F 3 "~" H 10150 3800 50  0001 C CNN
 	1    10150 3800
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9450 4500 9150 4500
+$Comp
+L DykoDAC-rescue:CS4398-cirrus-2 U?
+U 1 1 5C8F866A
+P 8050 3350
+AR Path="/5C8F866A" Ref="U?"  Part="1" 
+AR Path="/5C8F8588/5C8F866A" Ref="U8"  Part="1" 
+F 0 "U8" H 8050 3400 50  0000 C CNN
+F 1 "CS4398" H 8050 3300 50  0000 C CNN
+F 2 "Housings_SSOP:TSSOP-28_4.4x9.7mm_Pitch0.65mm" H 8050 3500 50  0001 C CNN
+F 3 "" H 8050 3350 50  0001 C CNN
+	1    8050 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6750 4250 7150 4250
+Wire Wire Line
+	6450 3750 7150 3750
+Wire Wire Line
+	5800 3550 7150 3550
 $EndSCHEMATC
