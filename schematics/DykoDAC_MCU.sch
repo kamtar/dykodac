@@ -380,14 +380,12 @@ F 3 "~" H 7750 3050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8000 3050 7900 3050
-Text Label 7600 4650 0    47   ~ 0
+Text Label 6950 4650 0    47   ~ 0
 SWCLK
 Text Label 7600 4750 0    47   ~ 0
 SWDIO
 Wire Wire Line
 	7600 4750 8000 4750
-Wire Wire Line
-	8000 4650 7600 4650
 Text Label 7600 2050 0    47   ~ 0
 DBG_RX
 Text Label 7600 1950 0    47   ~ 0
@@ -1151,4 +1149,35 @@ F 3 "~" H 8100 1100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6200 5900 6800 5900
+$Comp
+L Device:R R5
+U 1 1 5E58D5F8
+P 7200 4450
+F 0 "R5" H 7270 4496 50  0000 L CNN
+F 1 "1k" H 7250 4400 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" V 7130 4450 50  0001 C CNN
+F 3 "~" H 7200 4450 50  0001 C CNN
+	1    7200 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR019
+U 1 1 5E58E516
+P 7200 4200
+F 0 "#PWR019" H 7200 4050 50  0001 C CNN
+F 1 "+3V3" H 7215 4373 50  0000 C CNN
+F 2 "" H 7200 4200 50  0001 C CNN
+F 3 "" H 7200 4200 50  0001 C CNN
+	1    7200 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 4300 7200 4200
+Wire Wire Line
+	6950 4650 7200 4650
+Wire Wire Line
+	7200 4600 7200 4650
+Connection ~ 7200 4650
+Wire Wire Line
+	7200 4650 8000 4650
 $EndSCHEMATC
