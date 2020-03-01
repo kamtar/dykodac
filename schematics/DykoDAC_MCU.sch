@@ -1045,7 +1045,7 @@ U 1 1 5E80F106
 P 5150 2450
 F 0 "J6" H 5230 2492 50  0000 L CNN
 F 1 "Conn_01x05" H 5230 2401 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch1.00mm" H 5150 2450 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.00mm" H 5150 2450 50  0001 C CNN
 F 3 "~" H 5150 2450 50  0001 C CNN
 	1    5150 2450
 	1    0    0    -1  
@@ -1069,7 +1069,7 @@ U 1 1 5E84288A
 P 3000 3850
 F 0 "J8" H 2918 4267 50  0000 C CNN
 F 1 "Conn_01x05" H 2918 4176 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch1.00mm" H 3000 3850 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05_Pitch2.00mm" H 3000 3850 50  0001 C CNN
 F 3 "~" H 3000 3850 50  0001 C CNN
 	1    3000 3850
 	-1   0    0    -1  
@@ -1093,7 +1093,7 @@ U 1 1 5E88E1E7
 P 2100 3200
 F 0 "J7" H 2180 3192 50  0000 L CNN
 F 1 "Conn_01x04" H 2180 3101 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch1.00mm" H 2100 3200 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.00mm" H 2100 3200 50  0001 C CNN
 F 3 "~" H 2100 3200 50  0001 C CNN
 	1    2100 3200
 	1    0    0    -1  
@@ -1104,7 +1104,7 @@ U 1 1 5E890D92
 P 1200 4750
 F 0 "J9" H 1118 5067 50  0000 C CNN
 F 1 "Conn_01x04" H 1118 4976 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch1.00mm" H 1200 4750 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.00mm" H 1200 4750 50  0001 C CNN
 F 3 "~" H 1200 4750 50  0001 C CNN
 	1    1200 4750
 	-1   0    0    -1  
