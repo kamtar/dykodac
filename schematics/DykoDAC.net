@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\dev\dacdyko\schematics\DykoDAC.sch)
-    (date "01/03/2020 00:06:21")
+    (date "02/03/2020 23:15:33")
     (tool "Eeschema (5.1.5)-3")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -417,7 +417,7 @@
       (tstamp 5C8FFC64))
     (comp (ref X1)
       (value 22.5792Mhz)
-      (footprint Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm)
+      (footprint Oscillators:Oscillator_SMD_SeikoEpson_SG210-4pin_2.5x2.0mm_HandSoldering)
       (datasheet http://www.txccorp.com/download/products/osc/7C_o.pdf)
       (fields
         (field (name Part) DSC1001CI5))
@@ -433,7 +433,7 @@
       (tstamp 5D1FED73))
     (comp (ref X2)
       (value 24.576Mhz)
-      (footprint Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm)
+      (footprint Oscillators:Oscillator_SMD_SeikoEpson_SG210-4pin_2.5x2.0mm_HandSoldering)
       (datasheet http://www.txccorp.com/download/products/osc/7C_o.pdf)
       (libsource (lib Oscillator) (part TXC-7C) (description "CMOS SMD Crystal Clock Oscillator, TXC"))
       (sheetpath (names /DykoDAC_CS4398/) (tstamps /5C8F8588/))
@@ -914,7 +914,7 @@
       (tstamp 5D2686B9))
     (comp (ref J4)
       (value OLED)
-      (footprint Pin_Headers:Pin_Header_Angled_1x04_Pitch2.54mm)
+      (footprint Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm)
       (datasheet ~)
       (libsource (lib Connector_Generic) (part Conn_01x04) (description "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"))
       (sheetpath (names /DykoDAC_MCU/) (tstamps /5CF60BAD/))

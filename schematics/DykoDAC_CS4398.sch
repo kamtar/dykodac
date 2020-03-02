@@ -443,9 +443,9 @@ AR Path="/5CF60BAD/5D1FED66" Ref="X?"  Part="1"
 AR Path="/5C8F8588/5D1FED66" Ref="X1"  Part="1" 
 F 0 "X1" H 2800 5100 50  0000 L CNN
 F 1 "22.5792Mhz" H 2800 5000 50  0000 L CNN
-F 2 "Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm" H 3350 4350 50  0001 C CNN
+F 2 "Oscillators:Oscillator_SMD_SeikoEpson_SG210-4pin_2.5x2.0mm_HandSoldering" H 3350 4350 50  0001 C CNN
 F 3 "http://www.txccorp.com/download/products/osc/7C_o.pdf" H 2550 4700 50  0001 C CNN
-F 4 "DSC1001CI5" H 3100 4850 50  0000 C CNN "Part"
+F 4 "NDK NZ2520SD" H 3200 4850 50  0000 C CNN "Part"
 	1    2650 4700
 	1    0    0    -1  
 $EndComp
@@ -485,7 +485,7 @@ AR Path="/5CF60BAD/5D1FED7B" Ref="X?"  Part="1"
 AR Path="/5C8F8588/5D1FED7B" Ref="X2"  Part="1" 
 F 0 "X2" H 2750 6650 50  0000 L CNN
 F 1 "24.576Mhz" H 2750 6550 50  0000 L CNN
-F 2 "Oscillators:Oscillator_SMD_Abracon_ASE-4pin_3.2x2.5mm" H 3350 5900 50  0001 C CNN
+F 2 "Oscillators:Oscillator_SMD_SeikoEpson_SG210-4pin_2.5x2.0mm_HandSoldering" H 3350 5900 50  0001 C CNN
 F 3 "http://www.txccorp.com/download/products/osc/7C_o.pdf" H 2550 6250 50  0001 C CNN
 	1    2650 6250
 	1    0    0    -1  

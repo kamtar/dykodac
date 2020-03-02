@@ -516,7 +516,7 @@ U 1 1 5D128400
 P 2350 4850
 F 0 "J4" H 2430 4842 50  0000 L CNN
 F 1 "OLED" H 2430 4751 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x04_Pitch2.54mm" H 2350 4850 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 2350 4850 50  0001 C CNN
 F 3 "~" H 2350 4850 50  0001 C CNN
 	1    2350 4850
 	1    0    0    -1  
