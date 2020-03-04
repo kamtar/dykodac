@@ -439,7 +439,7 @@ U 1 1 5C9109CC
 P 7150 2100
 F 0 "U4" H 7150 2342 50  0000 C CNN
 F 1 "L7805" H 7150 2251 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-223-3_TabPin2" H 7175 1950 50  0001 L CIN
+F 2 "TO_SOT_Packages_SMD:TO-263-2" H 7175 1950 50  0001 L CIN
 F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 7150 2050 50  0001 C CNN
 	1    7150 2100
 	1    0    0    -1  
@@ -687,7 +687,7 @@ U 1 1 5E574563
 P 3700 2850
 F 0 "U3" H 3700 2701 50  0000 C CNN
 F 1 "LM337" H 3700 2610 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-223-3_TabPin2" H 3700 2650 50  0001 C CIN
+F 2 "TO_SOT_Packages_SMD:TO-263-2" H 3700 2650 50  0001 C CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm337-n.pdf" H 3700 2850 50  0001 C CNN
 	1    3700 2850
 	1    0    0    -1  
@@ -698,7 +698,7 @@ U 1 1 5E575F0D
 P 3700 1450
 F 0 "U2" H 3700 1208 50  0000 C CNN
 F 1 "LM317" H 3700 1299 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-223-3_TabPin2" H 3700 1250 50  0001 C CIN
+F 2 "TO_SOT_Packages_SMD:TO-263-2" H 3700 1250 50  0001 C CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm337-n.pdf" H 3700 1450 50  0001 C CNN
 	1    3700 1450
 	1    0    0    1   
