@@ -545,9 +545,11 @@ $EndComp
 Text Notes 7350 6900 0    157  ~ 0
 Filter and headphone amp
 $Comp
-L ti:TPA6120 U10
+L DykoDAC-rescue:TPA6120-ti U10
 U 1 1 5CD23F1B
 P 8000 3150
+AR Path="/5CD23F1B" Ref="U10"  Part="1" 
+AR Path="/5C90E752/5CD23F1B" Ref="U10"  Part="1" 
 F 0 "U10" H 8375 3337 60  0000 C CNN
 F 1 "TPA6120A2" H 8375 3231 60  0000 C CNN
 F 2 "test:SOIC-20W_ThermalPad" H 8000 3150 60  0001 C CNN
@@ -983,9 +985,11 @@ Wire Wire Line
 	4400 3550 4200 3550
 Connection ~ 4200 3550
 $Comp
-L kamtar:AudioJack2_Ground_Switch J2
+L DykoDAC-rescue:AudioJack2_Ground_Switch-kamtar J2
 U 1 1 5E5732C1
 P 10600 3800
+AR Path="/5E5732C1" Ref="J2"  Part="1" 
+AR Path="/5C90E752/5E5732C1" Ref="J2"  Part="1" 
 F 0 "J2" H 10420 3818 50  0000 R CNN
 F 1 "AudioJack" H 10420 3727 50  0000 R CNN
 F 2 "Connect:Stereo_Jack_3.5mm_Switch_Ledino_KB3SPRS" H 10600 4000 50  0001 C CNN
