@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L Connector:Screw_Terminal_01x02 J1
 U 1 1 5C8C0A04
-P 1150 2250
-F 0 "J1" H 1070 2467 50  0000 C CNN
-F 1 "AC Input" H 1070 2376 50  0000 C CNN
-F 2 "Terminal_Blocks:TerminalBlock_Altech_AK300-2_P5.00mm" H 1150 2250 50  0001 C CNN
-F 3 "~" H 1150 2250 50  0001 C CNN
-	1    1150 2250
+P 800 2250
+F 0 "J1" H 720 2467 50  0000 C CNN
+F 1 "AC Input" H 720 2376 50  0000 C CNN
+F 2 "Terminal_Blocks:TerminalBlock_Altech_AK300-2_P5.00mm" H 800 2250 50  0001 C CNN
+F 3 "~" H 800 2250 50  0001 C CNN
+	1    800  2250
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -71,13 +71,13 @@ $EndComp
 $Comp
 L power:GND #PWR01
 U 1 1 5C8C1266
-P 1600 2450
-F 0 "#PWR01" H 1600 2200 50  0001 C CNN
-F 1 "GND" H 1605 2277 50  0000 C CNN
-F 2 "" H 1600 2450 50  0001 C CNN
-F 3 "" H 1600 2450 50  0001 C CNN
-	1    1600 2450
-	1    0    0    -1  
+P 1150 2150
+F 0 "#PWR01" H 1150 1900 50  0001 C CNN
+F 1 "GND" H 1155 1977 50  0000 C CNN
+F 2 "" H 1150 2150 50  0001 C CNN
+F 3 "" H 1150 2150 50  0001 C CNN
+	1    1150 2150
+	-1   0    0    1   
 $EndComp
 $Comp
 L Device:CP C8
@@ -671,11 +671,7 @@ $EndComp
 Wire Wire Line
 	2200 2150 2200 2250
 Wire Wire Line
-	1350 2350 1600 2350
-Wire Wire Line
-	1600 2350 1600 2450
-Wire Wire Line
-	1350 2250 1600 2250
+	1150 2250 1150 2150
 Wire Wire Line
 	1900 2250 2200 2250
 Connection ~ 2200 2250
@@ -944,4 +940,22 @@ Wire Wire Line
 Wire Wire Line
 	9850 2700 9400 2700
 Connection ~ 9400 2700
+$Comp
+L Switch:SW_SPDT SW5
+U 1 1 5E682A1D
+P 1350 2350
+F 0 "SW5" H 1350 2635 50  0000 C CNN
+F 1 "SW_SPDT" H 1350 2544 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_Push_1P2T_Vertical_E-Switch_800UDP8P1A1M6" H 1350 2350 50  0001 C CNN
+F 3 "~" H 1350 2350 50  0001 C CNN
+	1    1350 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 2250 1550 2250
+Wire Wire Line
+	1150 2350 1000 2350
+Wire Wire Line
+	1150 2250 1000 2250
+NoConn ~ 1550 2450
 $EndSCHEMATC
