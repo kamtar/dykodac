@@ -82,12 +82,12 @@ Wire Wire Line
 $Comp
 L power:+3.3V #PWR021
 U 1 1 5C8F8A9A
-P 7150 1950
-F 0 "#PWR021" H 7150 1800 50  0001 C CNN
-F 1 "+3.3V" V 7165 2078 50  0000 L CNN
-F 2 "" H 7150 1950 50  0001 C CNN
-F 3 "" H 7150 1950 50  0001 C CNN
-	1    7150 1950
+P 6550 1950
+F 0 "#PWR021" H 6550 1800 50  0001 C CNN
+F 1 "+3.3V" V 6565 2078 50  0000 L CNN
+F 2 "" H 6550 1950 50  0001 C CNN
+F 3 "" H 6550 1950 50  0001 C CNN
+	1    6550 1950
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
@@ -99,9 +99,6 @@ Wire Wire Line
 	7950 1950 7750 1950
 Wire Wire Line
 	7400 1850 7400 1950
-Connection ~ 7400 1950
-Wire Wire Line
-	7400 1950 7150 1950
 Wire Wire Line
 	7750 1850 7750 1950
 Connection ~ 7750 1950
@@ -304,30 +301,6 @@ F 3 "~" H 5800 3800 50  0001 C CNN
 	1    5800 3800
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:+3.3V #PWR017
-U 1 1 5C901381
-P 6100 2950
-F 0 "#PWR017" H 6100 2800 50  0001 C CNN
-F 1 "+3.3V" V 6115 3078 50  0000 L CNN
-F 2 "" H 6100 2950 50  0001 C CNN
-F 3 "" H 6100 2950 50  0001 C CNN
-	1    6100 2950
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:+3.3V #PWR015
-U 1 1 5C9013EB
-P 5700 3550
-F 0 "#PWR015" H 5700 3400 50  0001 C CNN
-F 1 "+3.3V" V 5715 3678 50  0000 L CNN
-F 2 "" H 5700 3550 50  0001 C CNN
-F 3 "" H 5700 3550 50  0001 C CNN
-	1    5700 3550
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	6100 2950 6250 2950
 Wire Wire Line
 	6250 2850 6250 2950
 Connection ~ 6250 2950
@@ -719,4 +692,35 @@ Wire Wire Line
 	5800 3550 7150 3550
 Text Notes 1250 3750 0    79   ~ 0
 NDK NZ2520SD Crystal Oscillators
+$Comp
+L Device:L L?
+U 1 1 5E71E0D1
+P 6800 1950
+AR Path="/5C91BC19/5E71E0D1" Ref="L?"  Part="1" 
+AR Path="/5C8F8588/5E71E0D1" Ref="L3"  Part="1" 
+F 0 "L3" V 6990 1950 50  0000 C CNN
+F 1 "Ferrite Bead" V 6899 1950 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6800 1950 50  0001 C CNN
+F 3 "~" H 6800 1950 50  0001 C CNN
+	1    6800 1950
+	0    -1   -1   0   
+$EndComp
+Connection ~ 7400 1950
+Text Label 7100 1650 0    47   ~ 0
+3V3_CS
+Wire Wire Line
+	6950 1950 7100 1950
+Wire Wire Line
+	6650 1950 6550 1950
+Wire Wire Line
+	7100 1650 7100 1950
+Connection ~ 7100 1950
+Wire Wire Line
+	7100 1950 7400 1950
+Text Label 5800 2950 0    47   ~ 0
+3V3_CS
+Wire Wire Line
+	5800 2950 6250 2950
+Text Label 5700 3550 0    47   ~ 0
+3V3_CS
 $EndSCHEMATC
