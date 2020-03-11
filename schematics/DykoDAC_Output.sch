@@ -56,7 +56,7 @@ U 1 1 5C91151E
 P 2700 1250
 F 0 "C42" H 2800 1350 50  0000 C CNN
 F 1 "10u" H 2800 1150 50  0000 C CNN
-F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 2738 1100 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 2738 1100 50  0001 C CNN
 F 3 "~" H 2700 1250 50  0001 C CNN
 	1    2700 1250
 	1    0    0    -1  
@@ -78,7 +78,7 @@ U 1 1 5C911890
 P 1350 1250
 F 0 "C35" H 1450 1150 50  0000 C CNN
 F 1 "10u" H 1450 1350 50  0000 C CNN
-F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 1388 1100 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 1388 1100 50  0001 C CNN
 F 3 "~" H 1350 1250 50  0001 C CNN
 	1    1350 1250
 	-1   0    0    1   
@@ -874,7 +874,7 @@ U 1 1 5D14CEEA
 P 7950 2700
 F 0 "C50" V 8000 2850 50  0000 C CNN
 F 1 "10u" V 8000 2550 50  0000 C CNN
-F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 7988 2550 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 7988 2550 50  0001 C CNN
 F 3 "~" H 7950 2700 50  0001 C CNN
 	1    7950 2700
 	0    -1   -1   0   
@@ -885,7 +885,7 @@ U 1 1 5D14EBD1
 P 8850 2700
 F 0 "C52" V 8900 2850 50  0000 C CNN
 F 1 "10u" V 8900 2550 50  0000 C CNN
-F 2 "Capacitors_Tantalum_SMD:CP_Tantalum_Case-A_EIA-3216-18_Reflow" H 8888 2550 50  0001 C CNN
+F 2 "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A" H 8888 2550 50  0001 C CNN
 F 3 "~" H 8850 2700 50  0001 C CNN
 	1    8850 2700
 	0    -1   -1   0   
@@ -992,7 +992,7 @@ AR Path="/5E5732C1" Ref="J2"  Part="1"
 AR Path="/5C90E752/5E5732C1" Ref="J2"  Part="1" 
 F 0 "J2" H 10420 3818 50  0000 R CNN
 F 1 "AudioJack" H 10420 3727 50  0000 R CNN
-F 2 "Connect:Stereo_Jack_3.5mm_Switch_Ledino_KB3SPRS" H 10600 4000 50  0001 C CNN
+F 2 "kamtar:StereoJack_3.5mm_Lumberg" H 10600 4000 50  0001 C CNN
 F 3 "~" H 10600 4000 50  0001 C CNN
 	1    10600 3800
 	-1   0    0    -1  
