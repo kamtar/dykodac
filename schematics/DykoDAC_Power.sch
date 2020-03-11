@@ -683,21 +683,10 @@ U 1 1 5E574563
 P 3700 2850
 F 0 "U3" H 3700 2701 50  0000 C CNN
 F 1 "LM337" H 3700 2610 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:TO-263-2" H 3700 2650 50  0001 C CIN
+F 2 "Package_TO_SOT_SMD:TO-263-2" H 3700 2650 50  0001 C CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm337-n.pdf" H 3700 2850 50  0001 C CNN
 	1    3700 2850
 	1    0    0    -1  
-$EndComp
-$Comp
-L Regulator_Linear:LM337_SOT223 U2
-U 1 1 5E575F0D
-P 3700 1450
-F 0 "U2" H 3700 1208 50  0000 C CNN
-F 1 "LM317" H 3700 1299 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:TO-263-2" H 3700 1250 50  0001 C CIN
-F 3 "http://www.ti.com/lit/ds/symlink/lm337-n.pdf" H 3700 1450 50  0001 C CNN
-	1    3700 1450
-	1    0    0    1   
 $EndComp
 $Comp
 L Device:R_Small R41
@@ -958,4 +947,15 @@ Wire Wire Line
 Wire Wire Line
 	1150 2250 1000 2250
 NoConn ~ 1550 2450
+$Comp
+L Regulator_Linear:LM317_3PinPackage U2
+U 1 1 5E73E2F4
+P 3700 1450
+F 0 "U2" H 3700 1692 50  0000 C CNN
+F 1 "LM317" H 3700 1601 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-2" H 3700 1700 50  0001 C CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm317.pdf" H 3700 1450 50  0001 C CNN
+	1    3700 1450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
