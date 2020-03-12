@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:\Work\dykodac\schematics\DykoDAC.sch)
-    (date "11/03/2020 18:33:57")
+    (source C:\dev\dacdyko\schematics\DykoDAC.sch)
+    (date "12/03/2020 21:04:01")
     (tool "Eeschema (5.1.5)-3")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -275,7 +275,7 @@
       (tstamp 5D040DFE))
     (comp (ref F1)
       (value Polyfuse)
-      (footprint Fuse_Holders_and_Fuses:Fuse_SMD2920)
+      (footprint kamtar:UNIFuse_SMD2920)
       (datasheet ~)
       (libsource (lib Device) (part Polyfuse) (description "Resettable fuse, polymeric positive temperature coefficient"))
       (sheetpath (names /PowerSupply/) (tstamps /5C91BC19/))
@@ -1693,7 +1693,7 @@
     (library (logical Device)
       (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Device.lib"))
     (library (logical DykoDAC-rescue)
-      (uri C:\Work\dykodac\schematics/DykoDAC-rescue.lib))
+      (uri C:\dev\dacdyko\schematics/DykoDAC-rescue.lib))
     (library (logical Oscillator)
       (uri "C:\\Program Files\\KiCad\\share\\kicad\\library/Oscillator.lib"))
     (library (logical Regulator_Linear)
