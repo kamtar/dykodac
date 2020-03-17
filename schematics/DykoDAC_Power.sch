@@ -597,17 +597,6 @@ Wire Wire Line
 Wire Wire Line
 	9400 5000 8950 5000
 Connection ~ 8950 5000
-$Comp
-L Regulator_Linear:L7805 U5
-U 1 1 5CFE5010
-P 7150 4400
-F 0 "U5" H 7150 4642 50  0000 C CNN
-F 1 "78L05" H 7150 4551 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 7175 4250 50  0001 L CIN
-F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 7150 4350 50  0001 C CNN
-	1    7150 4400
-	1    0    0    -1  
-$EndComp
 Connection ~ 9400 4400
 Text Notes 8400 3900 0    118  ~ 0
 Oscillators
@@ -819,10 +808,10 @@ Connection ~ 3700 2150
 Wire Wire Line
 	4150 2150 3700 2150
 $Comp
-L power:+12V #PWR?
+L power:+12V #PWR0103
 U 1 1 5E6CE0CD
 P 4650 1300
-F 0 "#PWR?" H 4650 1150 50  0001 C CNN
+F 0 "#PWR0103" H 4650 1150 50  0001 C CNN
 F 1 "+12V" H 4665 1473 50  0000 C CNN
 F 2 "" H 4650 1300 50  0001 C CNN
 F 3 "" H 4650 1300 50  0001 C CNN
@@ -830,10 +819,10 @@ F 3 "" H 4650 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:-12V #PWR?
+L power:-12V #PWR0105
 U 1 1 5E6CE56D
 P 4650 3000
-F 0 "#PWR?" H 4650 3100 50  0001 C CNN
+F 0 "#PWR0105" H 4650 3100 50  0001 C CNN
 F 1 "-12V" H 4665 3173 50  0000 C CNN
 F 2 "" H 4650 3000 50  0001 C CNN
 F 3 "" H 4650 3000 50  0001 C CNN
@@ -841,14 +830,25 @@ F 3 "" H 4650 3000 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:+12V #PWR?
+L power:+12V #PWR0106
 U 1 1 5E6D4F49
 P 2550 4300
-F 0 "#PWR?" H 2550 4150 50  0001 C CNN
+F 0 "#PWR0106" H 2550 4150 50  0001 C CNN
 F 1 "+12V" H 2565 4473 50  0000 C CNN
 F 2 "" H 2550 4300 50  0001 C CNN
 F 3 "" H 2550 4300 50  0001 C CNN
 	1    2550 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L kamtar:78l05 U5
+U 1 1 5E735AE7
+P 7150 4400
+F 0 "U5" H 7150 4642 50  0000 C CNN
+F 1 "78l05" H 7150 4551 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 7175 4250 50  0001 L CIN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 7150 4350 50  0001 C CNN
+	1    7150 4400
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
