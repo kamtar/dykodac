@@ -66,7 +66,10 @@ extern "C" {
 
 /** Offset of wIndex in USB request buffer. */
 #define USB_wIndex_Offset 4
-
+typedef struct _usb_d_dev_prvt {
+	/** USB device descriptor table for peripheral to work. */
+	UsbDeviceDescriptor desc_table[3 + 1];
+} usb_d_dev_prvt_t;
 /** Offset of wLength in USB request buffer. */
 #define USB_wLength_Offset 6
 
@@ -199,6 +202,42 @@ enum usb_ep_halt_ctrl {
 	USB_EP_HALT_SET = USB_EP_STALL_SET,
 	/** Return the halt status. */
 	USB_EP_HALT_GET = USB_EP_STALL_GET
+};
+/** HPL USB device endpoint struct. */
+struct _usb_d_dev_ep {
+	/** Pointer to transaction buffer. */
+	uint8_t *trans_buf;
+	/** Transaction size. */
+	uint32_t trans_size;
+	/** Transaction transferred count. */
+	uint32_t trans_count;
+
+	/** Pointer to cache buffer, must be aligned. */
+	uint8_t *cache;
+
+	/** Endpoint size. */
+	uint16_t size;
+	/** Endpoint address. */
+	uint8_t ep;
+	/** Feature flags. */
+	union {
+		/** Interpreted by bit fields. */
+		struct {
+			/** EPCFG.ETYPE. */
+			uint8_t eptype : 3;
+			/** Stall status. */
+			uint8_t is_stalled : 1;
+			/** Transaction auto ZLP. */
+			uint8_t need_zlp : 1;
+			/** Transaction with cache */
+			uint8_t use_cache : 1;
+			/** Endpoint is busy. */
+			uint8_t is_busy : 1;
+			/** Transaction direction. */
+			uint8_t dir : 1;
+		} bits;
+		uint8_t u8;
+	} flags;
 };
 
 /** USB transactions status codes. */

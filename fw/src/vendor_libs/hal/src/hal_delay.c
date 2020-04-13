@@ -55,6 +55,10 @@ void delay_init(void *const hw)
 	_delay_init(hardware = hw);
 }
 
+uint32_t get_systime()
+{
+	return (uint32_t)_system_time_get(hardware);
+}
 /**
  * \brief Perform delay in us
  */

@@ -22,7 +22,7 @@ workspace "dykodac"
       toolset "gcc"
       kind "ConsoleApp"
       language "C++"   
-      buildoptions {"-mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 ", "-O0", "-g3 ", "-Wall", "-ffunction-sections", "-mlong-calls", "-mthumb"}
+      buildoptions {"-mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 ", "-O1", "-g3 ", "-Wall", "-ffunction-sections", "-mlong-calls", "-mthumb"}
       linkoptions { "-T \"./src/sys_boot/samd51j20a_flash.ld\"", "-g3", "-mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 ",
       "-Wl,--start-group", "-lm", "-Wl,--end-group", "-mthumb",
        "--specs=nosys.specs", "-Wl,--gc-sections"}

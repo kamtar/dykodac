@@ -433,6 +433,7 @@ int32_t usb_d_ep_transfer(const struct usb_d_transfer *xfer)
 	volatile uint8_t      state;
 	volatile hal_atomic_t flags;
 
+
 	if (ep_index < 0) {
 		return -USB_ERR_PARAM;
 	}

@@ -20,7 +20,6 @@ struct i2s_c_sync_desc I2S_0_0;
 
 struct flash_descriptor FLASH_0;
 
-struct usart_sync_descriptor USART_0;
 
 struct i2c_m_sync_desc I2C_0;
 
@@ -267,18 +266,13 @@ void USART_0_PORT_init(void)
 
 void USART_0_CLOCK_init(void)
 {
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_CORE, CONF_GCLK_SERCOM1_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_SLOW, CONF_GCLK_SERCOM1_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	//hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_CORE, CONF_GCLK_SERCOM1_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	//hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM1_GCLK_ID_SLOW, CONF_GCLK_SERCOM1_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
 
 	hri_mclk_set_APBAMASK_SERCOM1_bit(MCLK);
 }
 
-void USART_0_init(void)
-{
-	USART_0_CLOCK_init();
-	usart_sync_init(&USART_0, SERCOM1, (void *)NULL);
-	USART_0_PORT_init();
-}
+
 
 void I2C_0_PORT_init(void)
 {
@@ -506,9 +500,15 @@ void WDT_0_init(void)
 	wdt_init(&WDT_0, WDT);
 }
 
+void ClockInitInt(void);
+
 void system_init(void)
 {
 	init_mcu();
+
+	ClockInitInt();
+
+
 	EVENT_SYSTEM_0_init();
 
 
@@ -516,7 +516,7 @@ void system_init(void)
 
 	TIMER_0_init();
 
-	USART_0_init();
+	//USART_0_init();
 
 	I2C_0_init();
 
@@ -527,4 +527,56 @@ void system_init(void)
 	USB_0_init();
 
 	WDT_0_init();
+}
+
+void ClockInitInt(void)
+{
+	//Initialisation for 120 MHz (Or any speed you want, this code is set to 120 MHz) from the internal 32KHz Oscillator.
+
+
+	// CONFIGURE FLASH MEMORY WAIT STATES
+	NVMCTRL->CTRLA.bit.RWS = 4; // 4WS allows up to 119 MHz, 5WS allows 120 MHz
+	NVMCTRL->CTRLA.bit.AUTOWS = 1; // automatically determine the necessary wait states
+
+	// CONFIGURE EXTERNAL 32K CRYSTAL OSCILLATOR
+//	OSC32KCTRL->XOSC32K.bit.CGM = 1; // control gain mode: 1 = standard/XT 2 = high-speed/HS
+//	OSC32KCTRL->XOSC32K.bit.STARTUP = 0; // oscillator startup time, 0 = 62 ms
+//	OSC32KCTRL->XOSC32K.bit.ONDEMAND = 0; // always run
+//	OSC32KCTRL->XOSC32K.bit.XTALEN = 1; // enable crystal driver circuit for XIN32/XOUT32 pins
+//	OSC32KCTRL->XOSC32K.bit.EN32K = 1; // enable the 32 kHz output clock
+//	OSC32KCTRL->XOSC32K.bit.ENABLE = 1;
+//	while (!OSC32KCTRL->STATUS.bit.XOSC32KRDY); // wait until crystal oscillator is stable and ready to be used as a clock source
+//	OSC32KCTRL->RTCCTRL.bit.RTCSEL = OSC32KCTRL_RTCCTRL_RTCSEL_XOSC32K_Val; // RTC should use the external 32K crystal
+
+	// CONFIGURE MASTER CLOCK
+	MCLK->CPUDIV.bit.DIV = 1; // use a divisor of 1 for the master clock
+
+	//Configure ClockGen1 for PLL INTERNAL
+	GCLK->GENCTRL[1].bit.SRC=4;     //Internal 32KHz Oscillator.
+	GCLK->GENCTRL[1].bit.DIV = 1; // divisor 1 for the input clock from the PLL
+	GCLK->GENCTRL[1].bit.GENEN = 1;
+
+	GCLK->PCHCTRL[1].bit.GEN = 1;  //PERIPHERAL 1
+	GCLK->PCHCTRL[1].bit.CHEN = 1;  //ENABLE CHANNEL
+
+	// CONFIGURE PLL0
+	OSCCTRL->Dpll[0].DPLLCTRLB.bit.REFCLK= 0; // use GCLK as the PLL reference clock
+	OSCCTRL->Dpll[0].DPLLRATIO.reg = (3<<16) + 3661; // multiply OSC32K by 3662.11 to get 120 MHz (actual multiplier is LDR + 1 + LDRFRAC/32)  3661
+	//OSCCTRL->Dpll[0].DPLLRATIO.reg = (3<<16) + 1464; // multiply OSC32K by 1464 to get 48 MHz (actual multiplier is LDR + 1 + LDRFRAC/32)  1464
+
+	// errata: When using a low-frequency input clock on FDPLLn, several FDPLL unlocks may occur while the output
+	// frequency is stable. Workaround: when using a low-frequency input clock on FDPLLn, enable the lock bypass
+	// feature to avoid FDPLL unlocks.
+	OSCCTRL->Dpll[0].DPLLCTRLB.bit.LBYPASS = 1; // CLK_DPLL0 output clock is always on, and not dependent on frequency lock
+	OSCCTRL->Dpll[0].DPLLCTRLA.bit.ONDEMAND = 0; // always run
+	OSCCTRL->Dpll[0].DPLLCTRLA.bit.ENABLE = 1;
+
+//	while (!OSCCTRL->Dpll[0].DPLLSTATUS.bit.LOCK) ; // no point in checking DPLLSTATUS.bit.CLKRDY, because LBYPASS is enabled
+
+	// CONFIGURE CLOCK GENERATOR 0
+	GCLK->GENCTRL[0].bit.SRC = 7; // use PLL0 as the input
+	GCLK->GENCTRL[0].bit.DIV = 1; // divisor 1 for the input clock from the PLL
+	GCLK->GENCTRL[0].bit.GENEN = 1;
+
+	// do peripheral clock initialization here...
 }

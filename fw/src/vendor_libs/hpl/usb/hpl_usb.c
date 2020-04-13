@@ -494,42 +494,6 @@ static const struct _usb_ep_cfg_item _usb_ep_cfgs[] = {_USB_EP_CFG_ITEM(0)
 /** Number of endpoints supported. */
 #define USB_D_N_EP (1 + CONF_USB_D_NUM_EP_SP * 2)
 
-/** HPL USB device endpoint struct. */
-struct _usb_d_dev_ep {
-	/** Pointer to transaction buffer. */
-	uint8_t *trans_buf;
-	/** Transaction size. */
-	uint32_t trans_size;
-	/** Transaction transferred count. */
-	uint32_t trans_count;
-
-	/** Pointer to cache buffer, must be aligned. */
-	uint8_t *cache;
-
-	/** Endpoint size. */
-	uint16_t size;
-	/** Endpoint address. */
-	uint8_t ep;
-	/** Feature flags. */
-	union {
-		/** Interpreted by bit fields. */
-		struct {
-			/** EPCFG.ETYPE. */
-			uint8_t eptype : 3;
-			/** Stall status. */
-			uint8_t is_stalled : 1;
-			/** Transaction auto ZLP. */
-			uint8_t need_zlp : 1;
-			/** Transaction with cache */
-			uint8_t use_cache : 1;
-			/** Endpoint is busy. */
-			uint8_t is_busy : 1;
-			/** Transaction direction. */
-			uint8_t dir : 1;
-		} bits;
-		uint8_t u8;
-	} flags;
-};
 
 /** Check if the endpoint is used. */
 #define _usb_d_dev_ep_is_used(ept) ((ept)->ep != 0xFF)
@@ -597,10 +561,7 @@ struct _usb_d_dev {
 
 /** Private data for SAM0 USB peripheral.
  */
-typedef struct _usb_d_dev_prvt {
-	/** USB device descriptor table for peripheral to work. */
-	UsbDeviceDescriptor desc_table[CONF_USB_D_MAX_EP_N + 1];
-} usb_d_dev_prvt_t;
+
 
 /*@}*/
 
@@ -608,7 +569,7 @@ typedef struct _usb_d_dev_prvt {
 static struct _usb_d_dev dev_inst;
 
 /** USB device driver private data instance. */
-static struct _usb_d_dev_prvt prvt_inst;
+ struct _usb_d_dev_prvt prvt_inst;
 
 static void _usb_d_dev_reset_epts(void);
 
@@ -908,7 +869,7 @@ static inline void _usb_d_dev_sof(void)
 {
 	/* ACK SOF interrupt. */
 	hri_usbdevice_clear_INTFLAG_reg(USB, USB_DEVICE_INTFLAG_SOF);
-	dev_inst.callbacks.sof();
+	//dev_inst.callbacks.sof();
 }
 
 /**
@@ -1110,14 +1071,17 @@ static void _usb_d_dev_out_next(struct _usb_d_dev_ep *ept, bool isr)
 	uint16_t           last_trans = isr ? bank->PCKSIZE.bit.BYTE_COUNT : 0;
 	uint16_t           size_mask  = (ept->size == 1023) ? 1023 : (ept->size - 1);
 	uint16_t           last_pkt   = last_trans & size_mask;
-	uint16_t           trans_next;
-	uint8_t            inten;
+	uint16_t           trans_next = 0;
+	uint8_t            inten = 0;
 	bool               is_ctrl = _usb_d_dev_ep_is_ctrl(ept);
 
+	//volatile UsbDeviceDescBank bb =   prvt_inst.desc_table[epn].DeviceDescBank[0];
+			if(epn == 2)
+		;//__asm__("bkpt");
 	if (isr) {
 		_usbd_ep_ack_io_cpt(epn, 0);
 	}
-
+/*
 	/* If cache is used, copy data to buffer. */
 	if (ept->flags.bits.use_cache && ept->trans_size) {
 		uint16_t buf_remain = ept->trans_size - ept->trans_count;
@@ -1142,7 +1106,8 @@ static void _usb_d_dev_out_next(struct _usb_d_dev_ep *ept, bool isr)
 		/* Wait more data */
 		if (ept->trans_count < ept->trans_size) {
 			/* Continue OUT */
-			trans_next = ept->trans_size - ept->trans_count;
+			if(ept->trans_size > ept->trans_count)
+				trans_next = ept->trans_size - ept->trans_count;
 			if (ept->flags.bits.use_cache) {
 				/* Expect single packet each time. */
 				if (trans_next > ept->size) {
@@ -1164,6 +1129,7 @@ static void _usb_d_dev_out_next(struct _usb_d_dev_ep *ept, bool isr)
 				}
 				_usbd_ep_set_buf(epn, 0, (uint32_t)&ept->trans_buf[ept->trans_count]);
 			}
+
 			_usbd_ep_set_out_trans(epn, 0, trans_next, 0);
 			goto _out_rx_exec;
 		}
@@ -1178,7 +1144,15 @@ static void _usb_d_dev_out_next(struct _usb_d_dev_ep *ept, bool isr)
 	if (0 == epn) {
 		_usbd_ep_set_buf(epn, 0, (uint32_t)ept->cache);
 	}
+	ept->trans_count = last_trans;
 	_usb_d_dev_trans_done(ept, USB_TRANS_DONE);
+	//_usbd_ep_clear_bank_status(epn, 0);
+	hri_usbendpoint_clear_EPSTATUS_BK0RDY_bit(hw, epn);
+	//hri_usbendpoint_clear_EPSTATUS_DTGLOUT_bit(hw, epn);
+	hri_usbendpoint_clear_EPINTFLAG_TRCPT0_bit(hw, epn);
+	hri_usbendpoint_set_EPINTEN_TRCPT0_bit(hw, epn);
+
+	ept->flags.bits.is_busy = 1;
 	return;
 
 _out_rx_exec:
@@ -1321,6 +1295,7 @@ static inline void _usb_d_dev_trans_setup_isr(struct _usb_d_dev_ep *ept, const u
  */
 static inline void _usb_d_dev_trans_in_isr(struct _usb_d_dev_ep *ept, const uint8_t flags)
 {
+
 	/*
 	 * Check IN flags
 	 * If control endpoint, SETUP & OUT is checked to see if abort
@@ -1328,7 +1303,9 @@ static inline void _usb_d_dev_trans_in_isr(struct _usb_d_dev_ep *ept, const uint
 	if (flags & USB_DEVICE_EPINTFLAG_STALL1) {
 		_usb_d_dev_handle_stall(ept, 1);
 	} else if (flags & USB_DEVICE_EPINTFLAG_TRFAIL1) {
+
 		_usb_d_dev_handle_trfail(ept, 1);
+
 	} else if (flags & USB_DEVICE_EPINTFLAG_TRCPT1) {
 		_usb_d_dev_in_next(ept, true);
 	} else if (_usb_d_dev_ep_is_ctrl(ept)) {
@@ -1355,10 +1332,15 @@ static inline void _usb_d_dev_trans_out_isr(struct _usb_d_dev_ep *ept, const uin
 	 * If control endpoint, SETUP & IN NAK is checked to see if abort
 	 */
 	if (flags & USB_DEVICE_EPINTFLAG_STALL0) {
+		if(ept->ep == 2)
+			__asm__("bkpt");
 		_usb_d_dev_handle_stall(ept, 0);
 	} else if (flags & USB_DEVICE_EPINTFLAG_TRFAIL0) {
+		if(ept->ep == 2)
+			__asm__("bkpt");
 		_usb_d_dev_handle_trfail(ept, 0);
 	} else if (flags & USB_DEVICE_EPINTFLAG_TRCPT0) {
+
 		_usb_d_dev_out_next(ept, true);
 	} else if (_usb_d_dev_ep_is_ctrl(ept)) {
 		/* Check IN NAK
@@ -1371,7 +1353,7 @@ static inline void _usb_d_dev_trans_out_isr(struct _usb_d_dev_ep *ept, const uin
 		}
 	}
 }
-
+static int e = 0;
 /**
  * \brief Handles the endpoint interrupts.
  * \param[in] epint Endpoint interrupt summary (by bits).
@@ -1387,6 +1369,7 @@ static inline void _usb_d_dev_handle_eps(uint32_t epint, struct _usb_d_dev_ep *e
 	if (!(epint & (1u << epn))) {
 		return;
 	}
+
 	flags = hw->DEVICE.DeviceEndpoint[epn].EPINTFLAG.reg;
 	mask  = hw->DEVICE.DeviceEndpoint[epn].EPINTENSET.reg;
 	flags &= mask;
@@ -1396,7 +1379,10 @@ static inline void _usb_d_dev_handle_eps(uint32_t epint, struct _usb_d_dev_ep *e
 		} else if (_usb_d_dev_ep_is_in(ept)) {
 			_usb_d_dev_trans_in_isr(ept, flags);
 		} else {
+
+
 			_usb_d_dev_trans_out_isr(ept, flags);
+
 		}
 	}
 }
@@ -1411,6 +1397,7 @@ static void _usb_d_dev_handler(void)
 	uint8_t i;
 
 	uint16_t epint = hw->DEVICE.EPINTSMRY.reg;
+
 	if (0 == epint) {
 		if (_usb_d_dev_handle_nep()) {
 			return;
@@ -1422,6 +1409,7 @@ static void _usb_d_dev_handler(void)
 		if (ept->ep == 0xFF) {
 			continue;
 		}
+
 		_usb_d_dev_handle_eps(epint, ept);
 	}
 }
@@ -1510,10 +1498,16 @@ int32_t _usb_d_dev_enable(void)
 		hri_usbdevice_write_CTRLA_reg(hw, ctrla | USB_CTRLA_ENABLE);
 	}
 
+	NVIC_SetPriority(USB_0_IRQn, NVIC_EncodePriority (2, 2, 2));
+	NVIC_SetPriority(USB_1_IRQn, NVIC_EncodePriority (2, 2, 2));
+	NVIC_SetPriority(USB_2_IRQn, NVIC_EncodePriority (2, 2, 2));
+	NVIC_SetPriority(USB_3_IRQn, NVIC_EncodePriority (2, 2, 2));
 	NVIC_EnableIRQ(USB_0_IRQn);
 	NVIC_EnableIRQ(USB_1_IRQn);
 	NVIC_EnableIRQ(USB_2_IRQn);
 	NVIC_EnableIRQ(USB_3_IRQn);
+
+
 
 	hri_usbdevice_set_INTEN_reg(hw,
 	                            USB_DEVICE_INTENSET_SOF | USB_DEVICE_INTENSET_EORST | USB_DEVICE_INTENSET_RAMACER
@@ -1728,26 +1722,33 @@ int32_t _usb_d_dev_ep_enable(const uint8_t ep)
 		hri_usbendpoint_write_EPCFG_reg(hw, epn, epcfg);
 
 		bank[1].PCKSIZE.reg
-		    = USB_DEVICE_PCKSIZE_BYTE_COUNT(ept->size) | USB_DEVICE_PCKSIZE_SIZE(_usbd_ep_pcksize_size(ept->size));
+		    = USB_DEVICE_PCKSIZE_MULTI_PACKET_SIZE(ept->size) | USB_DEVICE_PCKSIZE_SIZE(_usbd_ep_pcksize_size(ept->size));
+		bank[1].ADDR.reg = (uint32_t)ept->cache;
 
-		/* By default, IN endpoint will NAK all token. */
-		_usbd_ep_set_in_rdy(epn, 1, false);
 		_usbd_ep_clear_bank_status(epn, 1);
+		hri_usbendpoint_clear_EPSTATUS_reg(hw, epn, USB_DEVICE_EPSTATUS_BK1RDY);
 
+		ept->flags.bits.is_busy = 0;
 	} else {
 
 		if (epcfg & USB_DEVICE_EPCFG_EPTYPE0_Msk) {
 			return -USB_ERR_REDO;
 		}
 		epcfg |= USB_DEVICE_EPCFG_EPTYPE0(ept->flags.bits.eptype);
+
 		hri_usbendpoint_write_EPCFG_reg(hw, epn, epcfg);
 
 		bank[0].PCKSIZE.reg = USB_DEVICE_PCKSIZE_MULTI_PACKET_SIZE(ept->size)
 		                      | USB_DEVICE_PCKSIZE_SIZE(_usbd_ep_pcksize_size(ept->size));
-
+		bank[0].ADDR.reg = (uint32_t)ept->cache;
 		/* By default, OUT endpoint will NAK all token. */
 		_usbd_ep_set_out_rdy(epn, 0, false);
+		hri_usbendpoint_set_EPINTEN_TRCPT0_bit(hw, epn);
+	//	hri_usbendpoint_set_EPINTEN_TRFAIL0_bit(hw, epn);
+	//	hri_usbendpoint_set_EPINTEN_STALL0_bit(hw, epn);
 		_usbd_ep_clear_bank_status(epn, 0);
+		hri_usbendpoint_clear_EPSTATUS_BK0RDY_bit(hw, epn);
+		ept->flags.bits.is_busy = 1;
 	}
 
 	return USB_OK;
@@ -1851,13 +1852,15 @@ int32_t _usb_d_dev_ep_stall(const uint8_t ep, const enum usb_ep_stall_ctrl ctrl)
  * \param[in, out] ept Pointer to endpoint information.
  * \param[in] code Information code passed.
  */
+
 static void _usb_d_dev_trans_done(struct _usb_d_dev_ep *ept, const int32_t code)
 {
+
 	if (!(_usb_d_dev_ep_is_used(ept) && _usb_d_dev_ep_is_busy(ept))) {
 		return;
 	}
 	ept->flags.bits.is_busy = 0;
-	dev_inst.ep_callbacks.done(ept->ep, code, ept->trans_count);
+	dev_inst.ep_callbacks.done(ept->ep, code, (uint32_t)ept);
 }
 
 /**
@@ -1919,6 +1922,7 @@ int32_t _usb_d_dev_ep_trans(const struct usb_d_transfer *trans)
 	bool     size_n_aligned = (trans->size & size_mask);
 
 	bool use_cache = false;
+
 
 	volatile hal_atomic_t flags;
 
@@ -2043,14 +2047,17 @@ void _usb_d_dev_register_ep_callback(const enum usb_d_dev_ep_cb_type type, const
 		dev_inst.ep_callbacks.done = (_usb_d_dev_ep_cb_done_t)f;
 	}
 }
-
+#include <hpl_gpio.h>
+#include <app_config.h>
 /**
  * \brief USB interrupt handler
  */
 void USB_0_Handler(void)
 {
 
+
 	_usb_d_dev_handler();
+
 }
 /**
  * \brief USB interrupt handler
@@ -2065,8 +2072,9 @@ void USB_1_Handler(void)
  */
 void USB_2_Handler(void)
 {
-
+	//_gpio_set_level(GPIO_PORTB,(1U << 7), true);
 	_usb_d_dev_handler();
+	//_gpio_set_level(GPIO_PORTB,(1U << 7), false);
 }
 /**
  * \brief USB interrupt handler
@@ -2075,4 +2083,5 @@ void USB_3_Handler(void)
 {
 
 	_usb_d_dev_handler();
+
 }

@@ -56,7 +56,7 @@ extern "C" {
  * \param[in] hw The pointer to hardware instance
  */
 void delay_init(void *const hw);
-
+uint32_t get_systime();
 /**
  * \brief Perform delay in us
  *

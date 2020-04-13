@@ -18,8 +18,6 @@ void FLASH_0_example(void);
 
 void TIMER_0_example(void);
 
-void USART_0_example(void);
-
 void I2C_0_example(void);
 
 void delay_example(void);

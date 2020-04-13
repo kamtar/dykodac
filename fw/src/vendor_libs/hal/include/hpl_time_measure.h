@@ -77,7 +77,7 @@ void _system_time_deinit(void *const hw);
  *
  * \param[in] hw The pointer to hardware instance to initialize
  */
-system_time_t _system_time_get(const void *const hw);
+system_time_t _system_time_get(void *const hw);
 
 /**
  * \brief Get maximum possible system time

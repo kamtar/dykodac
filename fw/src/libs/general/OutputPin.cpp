@@ -27,3 +27,8 @@ void OutputPin::clear()
 {
 	_gpio_set_level(m_port, (1U << m_pin), false);
 }
+
+void OutputPin::toggle()
+{
+	_gpio_toggle_level(m_port, (1U << m_pin));
+}

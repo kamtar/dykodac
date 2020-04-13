@@ -289,7 +289,7 @@
 // <i> Indicates whether Wait Lock is enabled or not
 // <id> dfll_arch_waitlock
 #ifndef CONF_DFLL_WAITLOCK
-#define CONF_DFLL_WAITLOCK 1
+#define CONF_DFLL_WAITLOCK 0
 #endif
 
 // <q> Bypass Coarse Lock
@@ -332,25 +332,25 @@
 // <1=>Closed Loop Mode
 // <id> dfll_mode
 #ifndef CONF_DFLL_MODE
-#define CONF_DFLL_MODE 0x0
+#define CONF_DFLL_MODE 0x1
 #endif
 
 // <o> Coarse Maximum Step <0x0-0x1F>
 // <id> dfll_arch_cstep
 #ifndef CONF_DFLL_CSTEP
-#define CONF_DFLL_CSTEP 0x1
+#define CONF_DFLL_CSTEP 0x14
 #endif
 
 // <o> Fine Maximum Step <0x0-0xFF>
 // <id> dfll_arch_fstep
 #ifndef CONF_DFLL_FSTEP
-#define CONF_DFLL_FSTEP 0x1
+#define CONF_DFLL_FSTEP 0xa
 #endif
 
 // <o> DFLL Multiply Factor <0x0-0xFFFF>
 //  <id> dfll_mul
 #ifndef CONF_DFLL_MUL
-#define CONF_DFLL_MUL 0x0
+#define CONF_DFLL_MUL 0xbb80
 #endif
 
 // <e> DFLL Calibration Overwrite
@@ -404,7 +404,7 @@
 // <i> Select the clock source.
 // <id> fdpll0_ref_clock
 #ifndef CONF_FDPLL0_GCLK
-#define CONF_FDPLL0_GCLK GCLK_PCHCTRL_GEN_GCLK3_Val
+#define CONF_FDPLL0_GCLK GCLK_PCHCTRL_GEN_GCLK4_Val
 #endif
 
 // <h> Digital Phase Locked Loop Control
@@ -433,14 +433,14 @@
 // <i> Value of LDRFRAC is calculated using Fclk_dpll=Fckr*(LDR+1+LDRFRAC/32) formula as given in datasheet. This value is directly written in to DPLLRATIO register
 // <id> fdpll0_ldrfrac
 #ifndef CONF_FDPLL0_LDRFRAC
-#define CONF_FDPLL0_LDRFRAC 0x10
+#define CONF_FDPLL0_LDRFRAC 0x0
 #endif
 
 // <o> Loop Divider Ratio Integer Part <0x0-0x1FFF>
 // <i> Value of LDR is calculated using Fclk_dpll=Fckr*(LDR+1+LDRFRAC/32) formula as given in datasheet. This value is directly written in to DPLLRATIO register
 // <id> fdpll0_ldr
 #ifndef CONF_FDPLL0_LDR
-#define CONF_FDPLL0_LDR 0xff6
+#define CONF_FDPLL0_LDR 0x27
 #endif
 
 // <o> Clock Divider <0x0-0x7FF>
@@ -478,7 +478,7 @@
 // <0x7=>The Time-out if no lock within 11 ms
 // <id> fdpll0_arch_ltime
 #ifndef CONF_FDPLL0_LTIME
-#define CONF_FDPLL0_LTIME 0x0
+#define CONF_FDPLL0_LTIME 0x4
 #endif
 
 // <o> Reference Clock Selection

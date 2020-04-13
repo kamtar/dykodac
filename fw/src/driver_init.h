@@ -29,7 +29,7 @@ extern "C" {
 
 #include <hal_timer.h>
 
-#include <hal_usart_sync.h>
+
 
 #include <hal_i2c_m_sync.h>
 #include <hal_spi_m_sync.h>

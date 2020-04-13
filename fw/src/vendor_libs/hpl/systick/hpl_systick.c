@@ -69,7 +69,7 @@ void _system_time_deinit(void *const hw)
 /**
  * \brief Get system time
  */
-system_time_t _system_time_get(const void *const hw)
+system_time_t _system_time_get(void *const hw)
 {
 	(void)hw;
 	return (system_time_t)SysTick->VAL;

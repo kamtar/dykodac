@@ -20,6 +20,7 @@ public:
 
     virtual void set() override;
 	virtual void clear() override;
+	void toggle();
 
 private:
     gpio_port m_port;

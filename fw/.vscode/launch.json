@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "miDebuggerServerAddress": "192.168.0.12:3030",
+            "program": "${workspaceRoot}/build/bin/dykodac_Debug.elf",
+            "MIMode": "gdb",
+            "cwd": ".",
+            "miDebuggerPath": "C:/arm-gcc/8.2.1-1.2-20190119-1237/bin/arm-none-eabi-gdb.exe",
+            "miDebuggerArgs": "--x ${workspaceRoot}/build/bin/gdb-load.gdb"
+
+        }
+    ]
+}

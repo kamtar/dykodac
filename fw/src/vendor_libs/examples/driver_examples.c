@@ -13,7 +13,7 @@
 #include <hpl_dma.h>
 
 // To use I2S example, enable DMA and uncomment below code
-/*
+
 #if CONF_DMAC_ENABLE == 0
 #warning "DMAC system driver needs to be enabled to use I2S driver"
 #endif
@@ -39,7 +39,7 @@ uint8_t i2sc_dma_channel_number = 0;
     }
 
 }
-*/
+
 
 static uint8_t src_data[512];
 static uint8_t chk_data[512];
@@ -89,18 +89,6 @@ void TIMER_0_example(void)
 	timer_add_task(&TIMER_0, &TIMER_0_task1);
 	timer_add_task(&TIMER_0, &TIMER_0_task2);
 	timer_start(&TIMER_0);
-}
-
-/**
- * Example of using USART_0 to write "Hello World" using the IO abstraction.
- */
-void USART_0_example(void)
-{
-	struct io_descriptor *io;
-	usart_sync_get_io_descriptor(&USART_0, &io);
-	usart_sync_enable(&USART_0);
-
-	io_write(io, (uint8_t *)"Hello World!", 12);
 }
 
 void I2C_0_example(void)

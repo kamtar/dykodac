@@ -222,6 +222,7 @@ static void _dmac_handler(void)
 	} else if (hri_dmac_get_INTPEND_TCMPL_bit(DMAC)) {
 		hri_dmac_get_CHINTFLAG_TCMPL_bit(DMAC, channel);
 		tmp_resource->dma_cb.transfer_done(tmp_resource);
+		hri_dmac_clear_CHINTFLAG_TCMPL_bit(DMAC, channel);
 	}
 }
 /**
