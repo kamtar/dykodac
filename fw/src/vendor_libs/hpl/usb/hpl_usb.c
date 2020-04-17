@@ -950,6 +950,11 @@ static inline void _usb_d_dev_suspend(void)
 /**
  * \brief Handles USB non-endpoint interrupt
  */
+extern uint16_t last_usb_ms[128];
+static uint16_t last = 0;
+float avg = 48000.0f;
+static int cnt = 0;
+
 static inline bool _usb_d_dev_handle_nep(void)
 {
 	bool     rc    = true;
@@ -957,7 +962,29 @@ static inline bool _usb_d_dev_handle_nep(void)
 	flags &= hri_usbdevice_read_INTEN_reg(USB);
 
 	if (flags & USB_DEVICE_INTFLAG_SOF) {
+
+
+		  TC5->COUNT16.CTRLBSET.reg = TC_CTRLBSET_CMD_READSYNC;
+		  while( TC5->COUNT16.SYNCBUSY.bit.CTRLB );
+
+		  // wait for syncronization and then return the TC value
+		  while( TC5->COUNT16.SYNCBUSY.reg );
+		  uint16_t v = (uint16_t)TC5->COUNT16.COUNT.reg;
+		  TC5->COUNT16.CTRLBSET.reg = TC_CTRLBSET_CMD_RETRIGGER;
+
+
+
+
+			// avg = (float)8/((float)8+1.0f) * (float)avg +  ((float)v)/((float)8+1.0f);
+
+if(v > 24500 && v<24600){
+	last_usb_ms[cnt] = v;
+		 if(++cnt>127)
+			 cnt=0;
+}
+
 		_usb_d_dev_sof();
+
 		return true;
 	}
 	if (flags & USB_DEVICE_INTFLAG_LPMSUSP) {

@@ -132,6 +132,7 @@ void _dma_set_irq_state(const uint8_t channel, const enum _dma_callback_type typ
 	} else if (DMA_TRANSFER_ERROR_CB == type) {
 		hri_dmac_write_CHINTEN_TERR_bit(DMAC, channel, state);
 	}
+	hri_dmac_write_CHINTEN_SUSP_bit(DMAC, channel, state);
 }
 
 int32_t _dma_set_destination_address(const uint8_t channel, const void *const dst)
@@ -208,6 +209,7 @@ int32_t _dma_dstinc_enable(const uint8_t channel, const bool enable)
 
 	return ERR_NONE;
 }
+bool b = false;
 /**
  * \internal DMAC interrupt handler
  */
@@ -216,13 +218,14 @@ static void _dmac_handler(void)
 	uint8_t               channel      = hri_dmac_get_INTPEND_reg(DMAC, DMAC_INTPEND_ID_Msk);
 	struct _dma_resource *tmp_resource = &_resources[channel];
 
-	if (hri_dmac_get_INTPEND_TERR_bit(DMAC)) {
+	if (hri_dmac_get_INTPEND_TERR_bit(DMAC) || hri_dmac_get_INTPEND_SUSP_bit(DMAC)) {
 		hri_dmac_clear_CHINTFLAG_TERR_bit(DMAC, channel);
-		tmp_resource->dma_cb.error(tmp_resource);
+		tmp_resource->dma_cb.error(0);
+		b = true;
 	} else if (hri_dmac_get_INTPEND_TCMPL_bit(DMAC)) {
 		hri_dmac_get_CHINTFLAG_TCMPL_bit(DMAC, channel);
 		tmp_resource->dma_cb.transfer_done(tmp_resource);
-		hri_dmac_clear_CHINTFLAG_TCMPL_bit(DMAC, channel);
+		b = true;
 	}
 }
 /**
@@ -237,7 +240,9 @@ void DMAC_0_Handler(void)
  */
 void DMAC_1_Handler(void)
 {
+
 	_dmac_handler();
+
 }
 /**
  * \brief DMAC interrupt handler

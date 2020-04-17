@@ -466,6 +466,51 @@ void USB_0_PORT_init(void)
 	                      // <GPIO_PIN_FUNCTION_M"> M
 	                      // <GPIO_PIN_FUNCTION_N"> N
 	                      PINMUX_PA25H_USB_DP);
+
+	gpio_set_pin_direction(PA23,
+		                       // <y> Pin direction
+		                       // <id> pad_direction
+		                       // <GPIO_DIRECTION_OFF"> Off
+		                       // <GPIO_DIRECTION_IN"> In
+		                       // <GPIO_DIRECTION_OUT"> Out
+		                       GPIO_DIRECTION_OUT);
+
+		gpio_set_pin_level(PA23,
+		                   // <y> Initial level
+		                   // <id> pad_initial_level
+		                   // <false"> Low
+		                   // <true"> High
+		                   false);
+
+		gpio_set_pin_pull_mode(PA23,
+		                       // <y> Pull configuration
+		                       // <id> pad_pull_config
+		                       // <GPIO_PULL_OFF"> Off
+		                       // <GPIO_PULL_UP"> Pull-up
+		                       // <GPIO_PULL_DOWN"> Pull-down
+		                       GPIO_PULL_OFF);
+
+		gpio_set_pin_function(PA23,
+		                      // <y> Pin function
+		                      // <id> pad_function
+		                      // <i> Auto : use driver pinmux if signal is imported by driver, else turn off function
+		                      // <PINMUX_PA25H_USB_DP"> Auto
+		                      // <GPIO_PIN_FUNCTION_OFF"> Off
+		                      // <GPIO_PIN_FUNCTION_A"> A
+		                      // <GPIO_PIN_FUNCTION_B"> B
+		                      // <GPIO_PIN_FUNCTION_C"> C
+		                      // <GPIO_PIN_FUNCTION_D"> D
+		                      // <GPIO_PIN_FUNCTION_E"> E
+		                      // <GPIO_PIN_FUNCTION_F"> F
+		                      // <GPIO_PIN_FUNCTION_G"> G
+		                      // <GPIO_PIN_FUNCTION_H"> H
+		                      // <GPIO_PIN_FUNCTION_I"> I
+		                      // <GPIO_PIN_FUNCTION_J"> J
+		                      // <GPIO_PIN_FUNCTION_K"> K
+		                      // <GPIO_PIN_FUNCTION_L"> L
+		                      // <GPIO_PIN_FUNCTION_M"> M
+		                      // <GPIO_PIN_FUNCTION_N"> N
+		                      PINMUX_PA23H_USB_SOF_1KHZ);
 }
 
 /* The USB module requires a GCLK_USB of 48 MHz ~ 0.25% clock

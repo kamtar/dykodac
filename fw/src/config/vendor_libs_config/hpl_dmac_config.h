@@ -301,7 +301,7 @@
 // <i> Defines the size of one beat
 // <id> dmac_beatsize_0
 #ifndef CONF_DMAC_BEATSIZE_0
-#define CONF_DMAC_BEATSIZE_0 2
+#define CONF_DMAC_BEATSIZE_0 1
 #endif
 
 // <o> Block Action
@@ -329,7 +329,7 @@
 // <e> Channel 1 settings
 // <id> dmac_channel_1_settings
 #ifndef CONF_DMAC_CHANNEL_1_SETTINGS
-#define CONF_DMAC_CHANNEL_1_SETTINGS 0
+#define CONF_DMAC_CHANNEL_1_SETTINGS 1
 #endif
 
 // <q> Channel Run in Standby
@@ -346,7 +346,7 @@
 // <i> Defines the trigger action used for a transfer
 // <id> dmac_trigact_1
 #ifndef CONF_DMAC_TRIGACT_1
-#define CONF_DMAC_TRIGACT_1 0
+#define CONF_DMAC_TRIGACT_1 2
 #endif
 
 // <o> Trigger source
@@ -438,7 +438,7 @@
 // <i> Defines the peripheral trigger which is source of the transfer
 // <id> dmac_trifsrc_1
 #ifndef CONF_DMAC_TRIGSRC_1
-#define CONF_DMAC_TRIGSRC_1 0
+#define CONF_DMAC_TRIGSRC_1 0x4E
 #endif
 
 // <o> Channel Arbitration Level
@@ -501,14 +501,14 @@
 // <i> Defines whether source or destination addresses are using the step size settings
 // <id> dmac_stepsel_1
 #ifndef CONF_DMAC_STEPSEL_1
-#define CONF_DMAC_STEPSEL_1 0
+#define CONF_DMAC_STEPSEL_1 1
 #endif
 
 // <q> Source Address Increment
 // <i> Indicates whether the source address incrementation is enabled or not
 // <id> dmac_srcinc_1
 #ifndef CONF_DMAC_SRCINC_1
-#define CONF_DMAC_SRCINC_1 0
+#define CONF_DMAC_SRCINC_1 1
 #endif
 
 // <q> Destination Address Increment
@@ -525,7 +525,7 @@
 // <i> Defines the size of one beat
 // <id> dmac_beatsize_1
 #ifndef CONF_DMAC_BEATSIZE_1
-#define CONF_DMAC_BEATSIZE_1 0
+#define CONF_DMAC_BEATSIZE_1 1
 #endif
 
 // <o> Block Action

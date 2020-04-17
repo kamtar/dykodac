@@ -311,7 +311,7 @@ static uint8_t g_UsbDeviceConfigurationDescriptor[] = {
 	                                                                         Usage: Feedback EP   */
 	    FS_ISO_FEEDBACK_ENDP_PACKET_SIZE, 0x00,                          /* wMaxPacketSize */
 	    0x01,                                                            /* interval polling(2^x ms) */
-	    0x05,                                                            /* bRefresh(32ms)  */
+	    0x03,                                                            /* bRefresh(32ms)  */
 	    0x00,                                                            /* unused */
 	#endif
 	#endif /* AUDIO_CLASS_2_0 */
