@@ -255,11 +255,11 @@ static uint8_t g_UsbDeviceConfigurationDescriptor[] = {
 	    USB_DESCRIPTOR_SUBTYPE_AUDIO_STREAMING_FORMAT_TYPE, /* DescriptorSubtype: AUDIO STREAMING FORMAT TYPE */
 	    USB_AUDIO_FORMAT_TYPE_I,                            /* Format Type: Type I */
 	    AUDIO_FORMAT_CHANNELS,                              /* Number of Channels: one channel */
-	    AUDIO_FORMAT_SIZE,                                  /* SubFrame Size: one byte per audio subframe */
-	    AUDIO_FORMAT_BITS,                                  /* Bit Resolution: 8 bits per sample */
+	    2,                                  /* SubFrame Size: one byte per audio subframe */
+	    16,                                  /* Bit Resolution: 8 bits per sample */
 	    0x01U,                                              /* One frequency supported */
 	                                                        /*   0x40, 0x1F,0x00U,                  8 kHz */
-	    TSAMFREQ2BYTES(AUDIO_SAMPLING_RATE_KHZ * 1000),     /* 16 kHz */
+	    TSAMFREQ2BYTES(44100),     /* 16 kHz */
                                    /*   0x80,0xBB,0x00U,                  48 kHz */
 	                                                        /*   0x00U, 0xFA,0x00U,                72 kHz */
 	#if defined(USB_DEVICE_AUDIO_USE_SYNC_MODE) && (USB_DEVICE_AUDIO_USE_SYNC_MODE > 0U)

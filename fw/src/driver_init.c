@@ -367,6 +367,7 @@ void SPI_0_init(void)
 	SPI_0_CLOCK_init();
 	spi_m_sync_init(&SPI_0, SERCOM4);
 	SPI_0_PORT_init();
+
 }
 
 void delay_driver_init(void)

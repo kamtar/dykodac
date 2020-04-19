@@ -952,7 +952,7 @@ static inline void _usb_d_dev_suspend(void)
  */
 extern uint16_t last_usb_ms[128];
 static uint16_t last = 0;
-float avg = 48000.0f;
+float avg = 44100.0f;
 static int cnt = 0;
 
 static inline bool _usb_d_dev_handle_nep(void)
@@ -977,7 +977,7 @@ static inline bool _usb_d_dev_handle_nep(void)
 
 			// avg = (float)8/((float)8+1.0f) * (float)avg +  ((float)v)/((float)8+1.0f);
 
-if(v > 24500 && v<24600){
+if(v > 21000 && v<23000){
 	last_usb_ms[cnt] = v;
 		 if(++cnt>127)
 			 cnt=0;

@@ -226,7 +226,7 @@ int32_t UAC1_USB::device_enable(struct usbdf_driver *drv,
 	//usb_d_ep_register_callback(0x81, USB_D_EP_CB_XFER, (FUNC_PTR)data_in);
 	usb_d_ep_enable(0x81);
 
-	usb_d_ep_init(0x02, USB_ENDPOINT_ISOCHRONOUS | 0x04, 196);
+	usb_d_ep_init(0x02, USB_ENDPOINT_ISOCHRONOUS | 0x04, 300);
 	usb_d_ep_register_callback(0x02, USB_D_EP_CB_XFER, (FUNC_PTR) data_in);
 	usb_d_ep_enable(0x02);
 

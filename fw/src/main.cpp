@@ -24,10 +24,10 @@ IOutputPin* output_pins[] {
 	&xosc_48_pin,
 	&led,
 	&cs4398_rst,
-	&cs4398_cs,
-	&cs4398_m0,
-	&cs4398_m2,
-	&cs4398_m3
+	&cs4398_cs
+//	&cs4398_m0,
+//	&cs4398_m2,
+//	&cs4398_m3
 };
 #define AUDIO_UPDATE_FEEDBACK_DATA(m, n) \
     {                                    \
@@ -35,7 +35,7 @@ IOutputPin* output_pins[] {
         m[1] = ((n >> 8U) & 0xFFU);      \
         m[2] = ((n >> 16U) & 0xFFU);     \
     }
-extern volatile uint16_t cache[4048];
+extern volatile int16_t cache[4048];
 extern volatile uint16_t uindex;
 extern volatile uint16_t incnt;
 extern volatile uint16_t outcnt;
@@ -47,52 +47,9 @@ uint32_t last_samples = 0;
 uint64_t samples = 0;
 uint32_t feedback = 48 << 14;
 
-constexpr uint32_t feedback_buff_target = 48*8;
+constexpr uint32_t feedback_buff_target = 42*8;
 uint32_t lastcnt = 0;
-void USB_AudioFeedbackDataUpdate()
-{
-    static int32_t audioSpeakerUsedDiff = 0x0, audioSpeakerDiffThres = 0x0;
-    static uint32_t feedbackValue = 0x0, originFeedbackValue = 0x0, audioSpeakerUsedSpace = 0x0,
-                    audioSpeakerLastUsedSpace = 0x0;
 
-    uint32_t s = samples;
-
-    start++;
-    if (start == 2)
-    {
-        originFeedbackValue =
-            ((s - last_samples) << 4) /
-            (AUDIO_FORMAT_CHANNELS * AUDIO_FORMAT_SIZE);
-        feedback = originFeedbackValue;
-        audioSpeakerUsedSpace =  fifo_space_occupied(incnt,outcnt,f_size);
-        audioSpeakerLastUsedSpace = audioSpeakerLastUsedSpace;
-    }
-    else if (start > 2)
-    {
-        audioSpeakerUsedSpace = fifo_space_occupied(incnt,outcnt,f_size);
-        audioSpeakerUsedDiff += (audioSpeakerUsedSpace - audioSpeakerLastUsedSpace);
-        audioSpeakerLastUsedSpace = audioSpeakerUsedSpace;
-
-        if ((audioSpeakerUsedDiff > -AUDIO_SAMPLING_RATE_KHZ) && (audioSpeakerUsedDiff < AUDIO_SAMPLING_RATE_KHZ))
-        {
-            audioSpeakerDiffThres = 4 * AUDIO_SAMPLING_RATE_KHZ;
-        }
-        if (audioSpeakerUsedDiff <= -audioSpeakerDiffThres)
-        {
-            audioSpeakerDiffThres += 4 * AUDIO_SAMPLING_RATE_KHZ;
-            feedbackValue += (AUDIO_SAMPLING_RATE_KHZ / AUDIO_SAMPLING_RATE_16KHZ) * (1);
-        }
-        if (audioSpeakerUsedDiff >= audioSpeakerDiffThres)
-        {
-            audioSpeakerDiffThres += 4 * AUDIO_SAMPLING_RATE_KHZ;
-            feedbackValue -= (AUDIO_SAMPLING_RATE_KHZ / AUDIO_SAMPLING_RATE_16KHZ) * (1);
-        }
-    }
-    else
-    {
-    }
-    s = samples/2;
-}
 int delta_num = 0;
 int last_tr = 0;
 int offg = 0;
@@ -100,20 +57,9 @@ int offg = 0;
 void do_feedback()
 {
 
-	uint32_t step = 10;
-
 		uint16_t buff_size = fifo_space_occupied(incnt,outcnt,f_size);
 		if(((Dmac *)DMAC)->ACTIVE.bit.ID == 1)
 			buff_size = buff_size + (last_tr-(uint16_t)((Dmac *)DMAC)->ACTIVE.bit.BTCNT);
-
-		if(abs((int)(buff_size-feedback_buff_target)) > 500 )
-			step = 50;
-		else if(abs((int)(buff_size-feedback_buff_target)) > 100 )
-			step = 20;
-		else if (abs((int)(buff_size-feedback_buff_target)) > 30 )
-			step = 10;
-		else
-			step = 1;
 
 
 		if ((buff_size < (feedback_buff_target -96)) && (delta_num < 5)) {
@@ -248,8 +194,8 @@ int main(void)
 	// NVIC_SetPriority(I2S_IRQn, NVIC_EncodePriority (2, 1, 1));
 	 NVIC_DisableIRQ(DMAC_0_IRQn);
 	 NVIC_DisableIRQ(DMAC_1_IRQn);
-		//NVIC_SetPriority(DMAC_0_IRQn, NVIC_EncodePriority (2, 2, 2));
-	//NVIC_SetPriority(DMAC_1_IRQn, NVIC_EncodePriority (1, 1, 0));
+		NVIC_SetPriority(DMAC_0_IRQn, NVIC_EncodePriority (2, 2, 2));
+			NVIC_SetPriority(DMAC_1_IRQn, NVIC_EncodePriority (2, 1, 1));
 	 NVIC_EnableIRQ(DMAC_0_IRQn);
 	 NVIC_EnableIRQ(DMAC_1_IRQn);
 
@@ -257,20 +203,76 @@ int main(void)
 		output_pins[i]->init();
 
 	cs4398_cs.set();
-	xosc_48_pin.set();
+	xosc_22_pin.set();
 
 	delay_ms(10);
 
+
+	spi_m_sync_enable(&SPI_0);
+	spi_m_sync_set_mode(&SPI_0, SPI_MODE_0);
 	I2S_0_init();
 	delay_ms(200);
 	cs4398_rst.clear();
 	delay_ms(200);
 	cs4398_rst.set();
-	delay_ms(500);
-	led.set();
+
+	cs4398_cs.clear();
+	spi_xfer tr;
+	uint8_t data[3] = {0x98,0x08,0xC0};
+	tr.txbuf = data;
+	tr.rxbuf = nullptr;
+	tr.size = 3;
+	 spi_m_sync_transfer(&SPI_0, &tr);
+	 cs4398_cs.set();
+
+	 data[1] = 0x02;
+	 data[2] = 0x10;
+	 cs4398_cs.clear();
+	spi_m_sync_transfer(&SPI_0, &tr);
+
+	cs4398_cs.set();
+	data[1] = 0x05;
+	data[2] = 20;
+	cs4398_cs.clear();
+	spi_m_sync_transfer(&SPI_0, &tr);
+
+	cs4398_cs.set();
+	data[1] = 0x06;
+	data[2] = 20;
+	cs4398_cs.clear();
+	spi_m_sync_transfer(&SPI_0, &tr);
+
+	cs4398_cs.set();
+	 data[1] = 0x07;
+	 data[2] = 0xB0;//B4/B0
+	 cs4398_cs.clear();
+	spi_m_sync_transfer(&SPI_0, &tr);
+
+	cs4398_cs.set();
+	data[1] = 0x08;
+	 data[2] = 1<<6;
+	 cs4398_cs.clear();
+	spi_m_sync_transfer(&SPI_0, &tr);
+
+	cs4398_cs.set();
+	delay_ms(200);
 
 
+
+
+/*
+	 data[1] = 0x07;
+	 data[2] = 0x01;
+	spi_m_sync_transfer(&SPI_0, &tr);*/
+
+	/*
+
+		*/
+
+	cs4398_cs.set();
 	usb.init_start();
+
+	led.set();
 
 	//((I2s *)I2S_0_0.dev.prvt)->CLKCTRL[0].bit.MCKEN = 0;
 	uint32_t time = 0;
@@ -318,6 +320,7 @@ int main(void)
 	while (1) {
 
 		uint16_t buff_size = fifo_space_occupied(incnt,outcnt,f_size);
+
 		if((check_later_dma && buff_size > 0) )
 		{
 

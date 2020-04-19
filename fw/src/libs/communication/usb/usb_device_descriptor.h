@@ -78,8 +78,8 @@
 #define FS_AUDIO_INTERRUPT_IN_PACKET_SIZE (8)
 #define HS_AUDIO_INTERRUPT_IN_INTERVAL (0x07U) /* 2^(7-1) = 8ms */
 #define FS_AUDIO_INTERRUPT_IN_INTERVAL (0x08U)
-#define HS_ISO_OUT_ENDP_PACKET_SIZE  196 /* This should be changed to 192 if sampling rate is 48k */
-#define FS_ISO_OUT_ENDP_PACKET_SIZE 196
+#define HS_ISO_OUT_ENDP_PACKET_SIZE  300 /* This should be changed to 192 if sampling rate is 48k */
+#define FS_ISO_OUT_ENDP_PACKET_SIZE 300
 #if defined(USB_DEVICE_AUDIO_USE_SYNC_MODE) && (USB_DEVICE_AUDIO_USE_SYNC_MODE > 0U)
 #else
 #define HS_ISO_FEEDBACK_ENDP_PACKET_SIZE (3)

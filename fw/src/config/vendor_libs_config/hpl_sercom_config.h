@@ -180,7 +180,7 @@
 // <e> Advanced Configuration
 // <id> spi_master_advanced
 #ifndef CONF_SERCOM_4_SPI_ADVANCED
-#define CONF_SERCOM_4_SPI_ADVANCED 0
+#define CONF_SERCOM_4_SPI_ADVANCED 1
 #endif
 
 // <o> Dummy byte <0x00-0x1ff>
@@ -280,7 +280,7 @@
 // <0x3=>PAD[3]
 // <id> spi_master_rxpo
 #ifndef CONF_SERCOM_4_SPI_RXPO
-#define CONF_SERCOM_4_SPI_RXPO 2
+#define CONF_SERCOM_4_SPI_RXPO 3
 #endif
 
 // <o> Transmit Data Pinout
