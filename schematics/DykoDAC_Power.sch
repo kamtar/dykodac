@@ -841,9 +841,11 @@ F 3 "" H 2650 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L kamtar:78l05 U5
+L DykoDAC-rescue:78l05-kamtar U5
 U 1 1 5E735AE7
 P 7150 4400
+AR Path="/5E735AE7" Ref="U5"  Part="1" 
+AR Path="/5C91BC19/5E735AE7" Ref="U5"  Part="1" 
 F 0 "U5" H 7150 4642 50  0000 C CNN
 F 1 "78l05" H 7150 4551 50  0000 C CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23" H 7175 4250 50  0001 L CIN

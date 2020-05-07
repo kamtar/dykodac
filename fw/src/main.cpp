@@ -25,22 +25,19 @@ IOutputPin* output_pins[] {
 	&led,
 	&cs4398_rst,
 	&cs4398_cs
-//	&cs4398_m0,
-//	&cs4398_m2,
-//	&cs4398_m3
 };
+
 #define AUDIO_UPDATE_FEEDBACK_DATA(m, n) \
     {                                    \
         m[0] = (n & 0xFFU);              \
         m[1] = ((n >> 8U) & 0xFFU);      \
         m[2] = ((n >> 16U) & 0xFFU);     \
     }
-extern volatile int16_t cache[4048];
-extern volatile uint16_t uindex;
+extern volatile uint16_t cache[4048];
 extern volatile uint16_t incnt;
 extern volatile uint16_t outcnt;
 extern volatile uint16_t f_size;
-extern volatile uint32_t n_frames;
+
 
 int start = 0;
 uint32_t last_samples = 0;
@@ -56,23 +53,21 @@ int offg = 0;
 
 void do_feedback()
 {
-
 		uint16_t buff_size = fifo_space_occupied(incnt,outcnt,f_size);
-		if(((Dmac *)DMAC)->ACTIVE.bit.ID == 1)
-			buff_size = buff_size + (last_tr-(uint16_t)((Dmac *)DMAC)->ACTIVE.bit.BTCNT);
 
+		if(DMAC->ACTIVE.bit.ID == true)
+			buff_size = buff_size + (last_tr - static_cast<uint16_t>(DMAC->ACTIVE.bit.BTCNT));
 
-		if ((buff_size < (feedback_buff_target -96)) && (delta_num < 5)) {
-
+		if ((buff_size < (feedback_buff_target -96)) && (delta_num < 5))
+		{
 								offg += 10;
 								delta_num++;
-								//old_gap = gap;
-							}
-							else if ( (buff_size > ((feedback_buff_target) + 96)) && (delta_num > -5)) {
-								offg -= 10;
-								delta_num--;
-									//old_gap = gap;
-								}
+		}
+		else if ( (buff_size > ((feedback_buff_target) + 96)) && (delta_num > -5))
+		{
+			offg -= 10;
+			delta_num--;
+		}
 
 
 	return;
@@ -120,7 +115,7 @@ void transfer_done(struct _dma_resource *resource)
 
 	if(dotherest!=0)
 	{
-		_dma_set_destination_address(0,  (const void *) (&cache[0]));
+		_dma_set_destination_address(0,  const_cast<const uint16_t*>(&cache[0]));
 		_dma_set_source_address(0, (const void*)(offset));
 		_dma_set_data_amount(0, (dotherest));
 		_dma_enable_transaction(0, true);
@@ -173,10 +168,6 @@ void i2stransfer_done(struct _dma_resource *resource)
 
 }
 
-void EIC_6_Handler()
-{
-	__asm__("bkpt");
-}
 extern float avg;
 void start_counter();
 int main(void)
@@ -398,23 +389,7 @@ void start_counter()
 	gpio_set_pin_level(PB11,  false);
 	gpio_set_pin_pull_mode(PB11,GPIO_PULL_OFF);
 	gpio_set_pin_function(PB11, PINMUX_PB11M_GCLK_IO5);
-/*
-	gpio_set_pin_direction(PA22, GPIO_DIRECTION_IN);
-	gpio_set_pin_level(PA22,  false);
-	gpio_set_pin_pull_mode(PA22,GPIO_PULL_UP);
-	gpio_set_pin_function(PA22, PINMUX_PA22A_EIC_EXTINT6);
 
-
-	hri_mclk_set_APBAMASK_EIC_bit(MCLK);
-	hri_gclk_write_PCHCTRL_reg(GCLK, EIC_GCLK_ID, 2 | (1 << GCLK_PCHCTRL_CHEN_Pos));
-
-	 EIC->EVCTRL.reg |= 1<<6;
-	  EIC->CONFIG[0].reg |= EIC_CONFIG_SENSE6_HIGH;
-	  EIC->ASYNCH.bit.ASYNCH = 1 <<6;
-	  EIC->INTENSET.bit.EXTINT = 1 <<6;
-	  EIC->CTRLA.bit.ENABLE = 1;
-	  while (EIC->SYNCBUSY.bit.ENABLE);
-*/
 		// CONFIGURE CLOCK GENERATOR 5
 		GCLK->GENCTRL[5].bit.SRC = 0x02; // use PLL0 as the input
 		GCLK->GENCTRL[5].bit.DIV = 1; // divisor 1 for the input clock from the PLL

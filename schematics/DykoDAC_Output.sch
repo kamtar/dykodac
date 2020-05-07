@@ -18,7 +18,7 @@ L Amplifier_Operational:AD8620 U9
 U 1 1 5C90E90F
 P 3850 3550
 F 0 "U9" H 3850 3917 50  0000 C CNN
-F 1 "AD8620/AD712" H 3850 3826 50  0000 C CNN
+F 1 "AD8066" H 3850 3826 50  0000 C CNN
 F 2 "Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm" H 3850 3550 50  0001 C CNN
 F 3 "http://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf" H 3850 3550 50  0001 C CNN
 	1    3850 3550
@@ -29,7 +29,7 @@ L Amplifier_Operational:AD8620 U9
 U 3 1 5C90E9FA
 P 2000 1100
 F 0 "U9" V 2100 1100 50  0000 L CNN
-F 1 "AD8620/AD712" V 2000 850 50  0000 L CNN
+F 1 "AD8066" V 2000 950 50  0000 L CNN
 F 2 "Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm" H 2000 1100 50  0001 C CNN
 F 3 "http://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf" H 2000 1100 50  0001 C CNN
 	3    2000 1100
@@ -514,7 +514,7 @@ L Amplifier_Operational:AD8620 U9
 U 2 1 5C92E767
 P 3950 6250
 F 0 "U9" H 3950 6617 50  0000 C CNN
-F 1 "AD8620/AD712" H 3950 6526 50  0000 C CNN
+F 1 "AD8066" H 3950 6526 50  0000 C CNN
 F 2 "Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm" H 3950 6250 50  0001 C CNN
 F 3 "http://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf" H 3950 6250 50  0001 C CNN
 	2    3950 6250
